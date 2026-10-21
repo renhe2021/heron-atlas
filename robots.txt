@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://renhe2021.github.io/heron-atlas/sitemap.xml
+Sitemap: https://heron-atlas.renhe2021.workers.dev/sitemap.xml

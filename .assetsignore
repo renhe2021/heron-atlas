@@ -1,0 +1,4 @@
+.git/
+.assetsignore
+DEPLOY-MANIFEST.json
+manifest.json
