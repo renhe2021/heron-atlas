@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://heron-atlas.pages.dev/sitemap.xml
