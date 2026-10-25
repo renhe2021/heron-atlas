@@ -7,4 +7,46 @@
 [hidden]{display:none!important}.reader-search{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;padding:18px 0 22px;border-block:1px solid var(--line);margin-bottom:24px}.reader-search label{display:grid;gap:6px;font-size:12px;min-width:0}.reader-search label:first-child{flex:1 1 220px}.reader-search input,.reader-search select,.reader-search button{font:13px var(--sans);padding:10px;border:1px solid var(--line);border-radius:0;background:var(--paper);color:var(--ink);max-width:100%;min-height:42px}.reader-search button{cursor:pointer}.reader-search input:focus-visible,.reader-search select:focus-visible,.reader-search button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.reader-search [role=status]{flex-basis:100%;margin:0}.news-columns,.official-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:32px}.news-columns>*,.official-columns>*{min-width:0}.data-column{border-top:1px solid var(--ink);padding-top:22px}.data-column h2{font-size:28px}.data-column .release-card,.official-columns .release-card{grid-column:1/-1}.data-column .release-card h3{font-size:19px;margin-bottom:12px}.data-column .release-card{padding-bottom:20px}.news-columns .event-list{display:block}.news-columns .event-card{grid-column:auto}.official-columns h3{font-size:20px}.official-columns .release-card h3{font-size:21px}.filter-scope{min-width:0}details{margin-block:28px;font-size:13px}summary{cursor:pointer}.data-column .card-bottom{display:block}.data-column .card-bottom .meta{text-align:left;margin-top:8px}@media(min-width:900px){.news-columns{grid-template-columns:minmax(0,2fr) minmax(250px,1fr);gap:42px}.official-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}.data-column{border-top:0;border-left:1px solid var(--line);padding:0 0 0 28px}}@media(max-width:479px){.reader-search label{flex:1 1 120px}.reader-search label:first-child{flex-basis:100%}.reader-search input,.reader-search select{width:100%}.reader-search button{width:100%}}
 
 .batch-summary{margin:0 0 16px;border-block:1px solid var(--line);padding:12px 0}.batch-summary>summary{font-size:12px;line-height:1.8;color:var(--muted)}.batch-summary .batch-meta{margin-bottom:12px}.batch-summary .batch-status{margin-top:18px}.news-columns>div>.filter-scope .release-card{grid-column:1/-1;padding:18px 0}.news-columns>div>.filter-scope .release-card h3{font-size:22px;line-height:1.6;margin-bottom:16px}.news-columns .filter-scope .release-grid{display:block}.news-columns .reader-search label:first-child{flex-basis:100%}.upcoming{border-top:1px solid var(--line);padding-top:24px;margin-top:16px}.upcoming>.calendar-list{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}.upcoming .calendar-row{grid-template-columns:70px minmax(0,1fr)}@media(min-width:900px){.upcoming>.calendar-list{grid-template-columns:repeat(3,minmax(0,1fr))}.upcoming .calendar-row{display:block}.upcoming .calendar-row h3{font-size:20px}}
-.release-card .digest{margin:0 0 18px;padding:12px 0 0;border-top:1px dashed var(--line)}.release-card .digest .label{margin:0 0 8px}.digest-text{font-size:14px;line-height:1.85;margin:0 0 8px}.figures{list-style:none;padding:0;margin:0 0 8px;font-size:12px;color:var(--muted)}.figures .figure{font-family:var(--mono);color:var(--ink)}.interpretation{font-size:12px;color:var(--muted);margin:0}
+/* Reader layout (2026-10-25). A card leads with publisher · region · kind, carries our first read as body
+   text, and closes with one time line (SGT / UTC) and a single official reference. Home and source pages
+   group cards by SGT day; the search tools fold away so the first item is one screen away on a phone. */
+body{text-spacing-trim:space-first}
+.release-card{border-top:1px solid var(--line);padding:18px 0 20px}
+.release-card .label{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;color:var(--muted);margin:0 0 8px;font-size:11px;letter-spacing:.04em}
+.release-card .label .src{color:var(--ink);font-weight:500}
+.release-card .label .sep{color:var(--line);white-space:pre}
+.release-card h3{font-size:21px;line-height:1.45;margin:0 0 10px;letter-spacing:-.005em}
+.tag{display:inline-block;font:500 10px/1.6 var(--mono);letter-spacing:.08em;color:var(--accent);border:1px solid currentColor;border-radius:2px;padding:0 6px;vertical-align:middle;text-transform:none}
+.release-card .label .tag{margin-left:4px}
+.tag-soft{color:var(--muted);margin:5px 10px 0 0;flex:none}
+.release-card .digest{margin:2px 0 14px;max-width:42em}
+.digest-text{font-size:15px;line-height:1.9;color:var(--ink);margin:0 0 10px;text-wrap:pretty}
+.figures{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 12px;padding:10px 0;border-block:1px solid var(--line)}
+.figures>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.figures dt{font:11px/1.6 var(--mono);color:var(--muted);letter-spacing:.02em}
+.figures .period{margin-left:6px}
+.figures dd{margin:0;font:500 15px/1.4 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.interpretation{display:flex;align-items:flex-start;font-size:14px;line-height:1.8;color:#38433b;margin:0;padding-left:12px;border-left:2px solid var(--accent)}
+.card-foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:12px;color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.card-foot .utc{display:inline;font-size:12px}
+.card-foot .utc:before{content:" / "}
+.card-foot .ref{margin-left:auto;color:var(--accent);text-decoration:none;font-weight:500}
+.card-foot .ref:hover{text-decoration:underline}
+.day-group{margin-top:30px}
+.day-group:first-of-type{margin-top:0}
+.day-heading{font:500 12px/1.7 var(--mono);letter-spacing:.06em;color:var(--ink);margin:0;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.day-heading time{font-weight:600}
+.day-group .release-grid{display:block}
+.day-group .release-card:first-child{border-top:0}
+.reader-tools{margin:0 0 22px;font-size:13px;border-bottom:1px solid var(--line)}
+.reader-tools>summary{padding:10px 0;color:var(--muted);list-style:none;display:flex;align-items:center;gap:10px}
+.reader-tools>summary::-webkit-details-marker{display:none}
+.reader-tools>summary:before{content:"";width:7px;height:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.reader-tools[open]>summary:before{transform:translateY(2px) rotate(-135deg)}
+.reader-tools .reader-search{border-top:0;margin-bottom:8px;padding-top:6px}
+.reader-note{margin:22px 0 0;max-width:42em}
+.section-notes{margin-top:26px}
+.section-notes .batch-summary{margin:0 0 10px}
+.news-columns>div>.filter-scope .release-card{padding:18px 0 20px}
+.news-columns>div>.filter-scope .release-card h3{font-size:21px;line-height:1.45;margin-bottom:10px}
+@media(max-width:479px){.hero-grid{padding-block:26px 30px}.hero h1{font-size:32px;margin:12px 0 10px}.hero-latin{font-size:17px;margin-bottom:14px}.hero-description{font-size:13px;line-height:1.9;margin-bottom:16px}.section{padding-block:30px}.section-heading{margin-bottom:20px}.release-card h3,.news-columns>div>.filter-scope .release-card h3{font-size:20px}.day-group{margin-top:26px}}
