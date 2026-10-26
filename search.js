@@ -60,3 +60,26 @@
     if (age > 3600000) node.textContent = '快照已超过 1 小时，可能过时；页面不会实时更新，请核对资料时点。';
   });
 })();
+
+/* Relative times for collection activity and cards (same-origin, no network); title keeps the absolute time. */
+(() => {
+  const nodes = Array.from(document.querySelectorAll('time[data-rel][datetime]'));
+  if (!nodes.length) return;
+  const label = (ms) => {
+    const minutes = Math.round(ms / 60000);
+    if (minutes < 1) return '刚刚';
+    if (minutes < 60) return minutes + ' 分钟前';
+    const hours = Math.round(minutes / 60);
+    if (hours < 48) return hours + ' 小时前';
+    return Math.round(hours / 24) + ' 天前';
+  };
+  const update = () => {
+    const now = Date.now();
+    nodes.forEach((node) => {
+      const at = Date.parse(node.getAttribute('datetime'));
+      if (!Number.isNaN(at) && at <= now + 60000) node.textContent = label(Math.max(0, now - at));
+    });
+  };
+  update();
+  setInterval(update, 60000);
+})();
