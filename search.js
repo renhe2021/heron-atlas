@@ -6,7 +6,8 @@
     const controls = scope.querySelector('[data-filter-controls]');
     if (!controls) return;
     const query = controls.querySelector('[data-filter-query]');
-    const fields = ['source', 'region', 'date'];
+    // The calendar page adds an importance select (2026-10-26); other pages keep the three fields.
+    const fields = ['source', 'region', 'date'].concat(controls.querySelector('[data-filter-level]') ? ['level'] : []);
     const rows = Array.from(scope.querySelectorAll('[data-filter-item]')).map((node) => {
       const values = {};
       fields.forEach((key) => {
