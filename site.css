@@ -82,4 +82,11 @@ body{text-spacing-trim:space-first}
 .item-ref{padding-top:16px;border-top:1px solid var(--line)}
 .item-ref .ref-link{font-size:16px;color:var(--accent)}
 .item-note{margin-top:30px}
+/* 2026-10-26 v3: Chinese headline + original title, importance tag, folded routine notices */
+.orig-title{font-size:12px;line-height:1.6;color:var(--muted);margin:-4px 0 8px;font-family:var(--sans)}
+.tag-key{color:#fff;background:var(--accent);border-color:var(--accent)}
+.more-releases{margin:18px 0 8px;border-top:1px solid var(--line);padding-top:10px}
+.more-releases summary{cursor:pointer;font-size:14px;color:var(--muted)}
+.news-columns.single{grid-template-columns:1fr}
+.news-first{padding-top:28px}
 

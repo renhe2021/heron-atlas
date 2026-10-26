@@ -77,7 +77,9 @@
     const now = Date.now();
     nodes.forEach((node) => {
       const at = Date.parse(node.getAttribute('datetime'));
-      if (!Number.isNaN(at) && at <= now + 60000) node.textContent = label(Math.max(0, now - at));
+      if (Number.isNaN(at)) return;
+      if (at <= now + 60000) node.textContent = label(Math.max(0, now - at));
+      else node.textContent = label(at - now).replace('前', '后').replace('刚刚', '即将');
     });
   };
   update();
