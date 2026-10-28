@@ -107,3 +107,48 @@ body{text-spacing-trim:space-first}
 
 /* Key-event subscription links (2026-10-28) */
 .subscribe{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;font-size:14px;margin:-8px 0 22px;color:var(--muted)}.subscribe a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);min-height:32px;display:inline-flex;align-items:center}.subscribe a:hover{color:var(--accent)}
+/* Readable floor (2026-10-28, reference sites + skill heron-public-design): information text >= 14px; mono labels and tags >= 12px; nav tap targets ~44px. Overrides only; layout grids keep their columns. */
+.meta,.freshness,.limitations,.cal-notes,.card-foot,.card-foot .utc,.item-meta,.item .crumbs,.latest-list .src,.source-index a,.rule-hints,.orig-title,.calendar-local,.event-section h2 .meta,.prose figcaption,.reader-search label,caption,.batch-summary>summary,.tradingview-widget-copyright{font-size:14px}
+.tl-note,.tl-src,.tl-status,.tl-eco,.cx-row .tl-eco,.day-heading,.calendar-note,.members,.batch-meta dd,.event-facts dt,.city-strip,.activity,.cx-stale{font-size:14px}
+table,.text-link,details,.reader-tools,.tl-past>summary,.cal-notes>summary,.cx-legend div,.tv-legend div,.prose aside,.reader-search input,.reader-search select,.reader-search button{font-size:14px}
+.tl-time,.cx-v{font-size:14px}.hero-description{font-size:15px}
+.label,.release-card .label,.tl-head,.cx-head,thead th,.batch-meta dt,.member-source,.cx-legend dt,.tv-legend dt{font-size:12px}
+.tag,.badge{font-size:12px;padding:1px 7px}.figures dt,.latest-list time,.utc,.footer-bottom p,.footer-bottom nav a{font-size:13px}
+nav a{font-size:14px;padding-block:10px;display:inline-block}.site-header nav{gap:4px 22px}
+.tl-imp{font-size:13px}.tl-allday{font-size:12px}
+@media(max-width:719px){.tl-row,.cx-row{grid-template-columns:60px minmax(0,1fr) auto}.tl-allday{font-size:11px;letter-spacing:-.02em}}
+@media(max-width:479px){nav a{font-size:13px;padding-block:9px}.brand-caption{font-size:11px}}
+/* Brand-first home (2026-10-28, founder: "首页还是应该体现我们的品牌…Why you choose us, why you should pay for me"; the feed moved to news/) */
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin:4px 0 0}.button{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;background:var(--ink);color:var(--paper);text-decoration:none;font-size:15px;font-weight:600;border-radius:2px}.button:hover{background:var(--accent);color:var(--paper)}
+.pitch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 40px}.pitch-col{border-top:1px solid var(--ink);padding-top:18px}.pitch-col h3{font-size:21px;margin:0 0 12px}.pitch-col ul{margin:0;padding:0;list-style:none}.pitch-col li{font-size:15px;line-height:1.85;padding:8px 0;border-bottom:1px solid var(--line)}.pitch-col li:last-child{border-bottom:0}
+.proof{padding-block:8px 44px}.proof-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 40px;list-style:none;margin:0;padding:22px 0;border-block:1px solid var(--line)}.proof-list li{display:flex;align-items:baseline;gap:12px}.proof-list strong{font:500 46px/1 var(--serif);letter-spacing:-.03em;font-variant-numeric:tabular-nums}.proof-list span{font-size:15px;color:var(--muted)}.proof .freshness{border-top:0;margin-top:10px;padding-top:0}
+.pro-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:18px 56px;padding-block:52px}.pro h2{margin:8px 0 14px}.pro p:not(.label){font-size:16px;line-height:1.85;margin:0}.pro-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}.pro-list li{font-size:16px;line-height:1.8;padding:12px 0;border-bottom:1px solid rgba(20,26,23,.18)}.pro-note{grid-column:1/-1;margin:0}
+.explore-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;list-style:none;margin:0;padding:0}.explore-grid li{border-top:1px solid var(--ink)}.explore-grid a{display:flex;flex-direction:column;gap:6px;padding:18px 0 22px;text-decoration:none;min-height:44px}.explore-name{font:600 21px/1.4 var(--serif)}.explore-desc{font-size:14px;color:var(--muted);line-height:1.8}.explore-grid a:hover .explore-name{color:var(--accent)}
+@media(max-width:899px){.pitch-grid,.pro-grid{grid-template-columns:1fr}.explore-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-list{grid-template-columns:1fr;gap:14px}}
+@media(max-width:479px){.explore-grid{grid-template-columns:1fr}.proof-list strong{font-size:38px}.pro-grid{padding-block:40px}}
+/* Language switch and Taiwan Traditional pages (founder 2026-10-28). Traditional headings skip the Simplified subset font so a heading never mixes two typefaces. */
+:root:lang(zh-Hant){--serif:"Atlas Display","Songti TC","Noto Serif CJK TC","Noto Serif TC","PMingLiU",Georgia,serif;--sans:system-ui,-apple-system,"PingFang TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif}
+.site-header>nav:first-of-type{margin-left:auto}.site-header nav.lang-switch{gap:0;align-items:center;flex-wrap:nowrap}.lang-switch>a,.lang-switch>span{font-size:13px;padding-block:10px;line-height:1.2}.lang-switch>*+*::before{content:"/";color:var(--line);font-weight:400;margin:0 9px}.lang-switch a{text-decoration:none;color:var(--muted)}.lang-switch a:hover{color:var(--accent)}.lang-switch>span{color:var(--ink);font-weight:600}
+@media(min-width:720px){.site-header nav.lang-switch::before{content:"";width:1px;height:14px;background:var(--line);margin-right:20px}}
+@media(max-width:719px){.site-header>nav:first-of-type{margin-left:0;order:2;flex-basis:100%}.site-header nav.lang-switch{order:1;margin-left:auto}}
+@media(max-width:479px){:root:lang(en) .brand-caption{display:none}}
+/* P3 (founder 2026-10-28, reference-site study): two tag layers and one fixed key time per card. Institution badges are
+   dark and low-saturation (Chinese institutions warm ochre, overseas cool slate); topics are light tints of the same
+   family. The key time is the card's first line, and a right-hand rail with a 2px rule on the wide news feed. */
+.card-tags{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0 0 10px}
+.src-badge{display:inline-block;font:600 13px/1.65 var(--sans);letter-spacing:.02em;color:#F6F1E7;background:#3E4C57;border-radius:2px;padding:1px 8px}
+.src-badge.src-cn{background:#7A5530}
+.topic{display:inline-block;font:500 13px/1.65 var(--sans);color:#3E4C57;background:rgba(62,76,87,.11);border-radius:2px;padding:1px 8px}
+.src-cn~.topic{color:#7A5530;background:rgba(122,85,48,.12)}
+.card-region{font-size:13px;color:var(--muted)}
+.card-tags .tag{margin-left:2px}
+.card-time{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:0 0 8px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.card-clock{font:600 15px/1.4 var(--mono);color:var(--ink)}
+.card-time .utc{display:inline;font-size:13px}
+.card-main{min-width:0}
+.card-foot .ref{margin-left:0}
+@media(min-width:1000px){.news-columns>div .release-card{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:0 28px;align-items:start}
+.news-columns>div .release-card .card-main{grid-column:1;grid-row:1}
+.news-columns>div .release-card .card-time{grid-column:2;grid-row:1;flex-direction:column;align-items:flex-start;gap:2px;margin:4px 0 0;padding-left:14px;border-left:2px solid var(--ink)}
+.news-columns>div .release-card .card-clock{font-size:20px}}
+@media(max-width:479px){.lang-tail{display:none}}
