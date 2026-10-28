@@ -86,3 +86,34 @@
   update();
   setInterval(update, 60000);
 })();
+
+
+/* Answer-card countdown (2026-10-28): the build writes the instant and the first label; this only ticks it every
+   30 s while the tab is visible, and after the instant says so instead of guessing what happened. */
+(() => {
+  const nodes = Array.from(document.querySelectorAll('[data-countdown]'));
+  if (!nodes.length) return;
+  const label = (ms) => {
+    const minutes = Math.floor(ms / 60000);
+    if (minutes < 1) return '即将公布';
+    if (minutes < 60) return minutes + '分后';
+    const hours = Math.floor(minutes / 60);
+    const rest = minutes % 60;
+    if (hours < 48) return hours + '小时' + (rest ? rest + '分' : '') + '后';
+    return Math.floor(hours / 24) + '天后';
+  };
+  const update = () => {
+    if (document.hidden) return;
+    const now = Date.now();
+    nodes.forEach((node) => {
+      const at = Date.parse(node.getAttribute('data-countdown'));
+      if (Number.isNaN(at)) return;
+      const left = at - now;
+      node.textContent = left > 0 ? label(left) : '已到时间，以官方公布为准';
+      node.classList.toggle('is-past', left <= 0);
+    });
+  };
+  update();
+  setInterval(update, 30000);
+  document.addEventListener('visibilitychange', update);
+})();
