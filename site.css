@@ -152,3 +152,25 @@ nav a{font-size:14px;padding-block:10px;display:inline-block}.site-header nav{ga
 .news-columns>div .release-card .card-time{grid-column:2;grid-row:1;flex-direction:column;align-items:flex-start;gap:2px;margin:4px 0 0;padding-left:14px;border-left:2px solid var(--ink)}
 .news-columns>div .release-card .card-clock{font-size:20px}}
 @media(max-width:479px){.lang-tail{display:none}}
+/* Phase 2: one useful answer on entry, compact local follows and auditable facts. */
+.home{padding-block:36px 60px;max-width:1000px}.brand-promise{font:500 clamp(22px,3vw,34px)/1.6 var(--serif);margin:0 0 24px;max-width:30em}.home h2{font-size:22px;margin:0 0 14px}.home>section{margin-block:28px}.home .answer-card{padding:24px;display:block}.home .answer-card h3{margin:0 0 12px;font-size:26px}.home .answer-card .button{display:inline-block;margin-top:8px}.home-latest ul,.home-judgments ul{padding-left:20px}.home-latest li,.home-judgments li{padding-block:8px}.home-why{border-top:1px solid var(--line);padding-top:22px}.home-why p{margin-bottom:5px;font-size:14px}.follows h2{font:500 14px var(--sans);margin:0 0 12px}.follow-chips{display:flex;gap:8px;flex-wrap:wrap}.follow-chips button{font:14px var(--sans);padding:8px 14px;min-height:42px;border:1px solid var(--line);border-radius:24px;color:var(--ink);background:var(--paper);cursor:pointer}.follow-chips button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}.follow-chips button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.follows .meta{font-size:12px;margin:10px 0 18px}.banks{min-width:760px}.banks td,.banks th{vertical-align:top;max-width:280px}.bank-rate{font-variant-numeric:tabular-nums;min-width:130px}.banks .meta{font-size:12px}.judgment{border-top:1px solid var(--line);padding-block:24px;scroll-margin-top:24px}.judgment h2{font-size:25px}.judgment dt{font-weight:600;margin-top:12px}.judgment dd{margin:0}.subscriptions h2{font-size:18px}.subscriptions p{display:flex;flex-wrap:wrap;gap:12px}.page-content>.follows{margin-bottom:24px}
+/* Bank rows share the calendar's narrow-screen breakpoint; desktop table rules stay intact. */
+@media(max-width:719px){
+  .banks{display:block;min-width:0}
+  .banks thead{display:none}
+  .banks tbody{display:block}
+  .banks tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding-block:20px;border-bottom:1px solid var(--line)}
+  .banks th,.banks td{min-width:0;max-width:none;padding:0;border:0}
+  .banks th,.banks td,.banks .meta{font-size:14px}
+  .banks tbody th{grid-column:1;font-size:16px}
+  .banks .bank-rate{grid-column:2}
+  .banks .bank-rate br{display:none}
+  .banks .bank-last{grid-column:1/-1}
+  .banks .bank-next{grid-column:1/-1}
+  .banks .bank-verified{grid-column:1/-1}
+  .banks .bank-note{grid-column:1/-1}
+  .banks td[data-label]::before{content:attr(data-label);display:block;font-weight:500;color:var(--muted)}
+  .banks p{margin:0}
+  .banks td time{white-space:normal}
+  .banks a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;max-width:100%;padding-block:8px}
+}

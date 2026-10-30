@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Heron Atlas//Key Events//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Heron Atlas 關鍵事件
+X-WR-TIMEZONE:Asia/Shanghai
+X-PUBLISHED-TTL:PT1H
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+BEGIN:VEVENT
+UID:boe-mpc.boe-mpc-2026-11-05@heron-atlas
+DTSTAMP:20261030T183712Z
+DTSTART:20261105T120000Z
+DTEND:20261105T123000Z
+SUMMARY:英國央行利率決議（MPC）
+DESCRIPTION:北京時間 11月5日 20:00；以官方公布為準。 官方
+ 出處：https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-date
+ s 本站事件頁：https://heron-atlas.renhe2021.workers.dev/zh-hant/even
+ ts/2026-11-boe/?ref=ics
+URL:https://heron-atlas.renhe2021.workers.dev/zh-hant/events/2026-11-boe/?r
+ ef=ics
+END:VEVENT
+END:VCALENDAR
