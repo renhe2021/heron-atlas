@@ -6,13 +6,13 @@ const TRADITIONAL = {
   '日期未提供': '日期未提供', '地区未提供': '地區未提供', '来源未提供': '來源未提供',
   '匹配 {n} 条 · 仅当前展示快照': '匹配 {n} 條 · 僅當前展示快照',
   '快照已超过 1 小时，可能过时；页面不会实时更新，请核对资料时点。': '快照已超過 1 小時，可能過時；頁面不會即時更新，請核對資料時點。',
-  '刚刚': '剛剛', '{n} 分钟前': '{n} 分鐘前', '{n} 小时前': '{n} 小時前', '{n} 天前': '{n} 天前', '{n} 分钟后': '{n} 分鐘後',
+  '成功': '成功', '刚刚': '剛剛', '{n} 分钟前': '{n} 分鐘前', '{n} 小时前': '{n} 小時前', '{n} 天前': '{n} 天前', '{n} 分钟后': '{n} 分鐘後',
   '{n} 小时后': '{n} 小時後', '{n} 天后': '{n} 天後', '后': '後', '即将': '即將',
   '即将公布': '即將公布', '分后': '分後', '小时': '小時', '分': '分', '天后': '天後',
   '已到时间，以官方公布为准': '已到時間，以官方公布為準'};
 /* en/ pages only show relative times from this script for now. */
 const ENGLISH = {
-  '刚刚': 'just now', '即将': 'soon', '{n} 分钟前': '{n} min ago', '{n} 小时前': '{n} h ago', '{n} 天前': '{n} days ago',
+  '成功': 'success', '刚刚': 'just now', '即将': 'soon', '{n} 分钟前': '{n} min ago', '{n} 小时前': '{n} h ago', '{n} 天前': '{n} days ago',
   '{n} 分钟后': 'in {n} min', '{n} 小时后': 'in {n} h', '{n} 天后': 'in {n} days'};
 const PAGE_LANG = document.documentElement.lang;
 const T = (text) => (PAGE_LANG.startsWith('zh-Hant') && TRADITIONAL[text]) || (PAGE_LANG === 'en' && ENGLISH[text]) || text;
@@ -95,7 +95,8 @@ const T = (text) => (PAGE_LANG.startsWith('zh-Hant') && TRADITIONAL[text]) || (P
     nodes.forEach((node) => {
       const at = Date.parse(node.getAttribute('datetime'));
       if (Number.isNaN(at)) return;
-      node.textContent = at <= now + 60000 ? label(Math.max(0, now - at), false) : label(at - now, true);
+      const relative = at <= now + 60000 ? label(Math.max(0, now - at), false) : label(at - now, true);
+      node.textContent = relative + (node.hasAttribute('data-rel-success') ? ' ' + T('成功') : '');
     });
   };
   update();
