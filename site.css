@@ -174,3 +174,31 @@ nav a{font-size:14px;padding-block:10px;display:inline-block}.site-header nav{ga
   .banks td time{white-space:normal}
   .banks a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;max-width:100%;padding-block:8px}
 }
+
+/* Statement revisions use ink, because there is no dedicated revised-status colour token. */
+.statement-page{max-width:900px;padding-block:24px 48px;overflow-wrap:anywhere;font-size:16px;line-height:1.8}
+.statement-page h1{font-size:clamp(28px,4vw,44px);margin:4px 0 20px}
+.statement-page h2{font-size:24px;margin:24px 0 12px}
+.statement-page h3{font:600 14px/1.8 var(--sans);margin:0 0 10px}
+.statement-page .statement-answer{display:block;padding:16px 0;margin-bottom:20px}
+.statement-answer p{margin:0 0 8px;font-size:16px;line-height:1.8}.statement-answer p:first-child{font-weight:600}.statement-answer p:last-child{margin:0}
+.statement-page a{min-height:44px;display:inline-flex;align-items:center;max-width:100%}
+.statement-change{padding:16px 0;border-top:1px solid var(--line)}
+.statement-page .statement-caption{font-size:14px;color:var(--muted);margin:0 0 2px}
+.statement-page .statement-quote{font:400 16px/1.75 var(--sans);margin:0 0 10px}
+:root:lang(zh) .statement-changes .statement-quote,:root:lang(zh) .statement-unchanged .statement-quote{color:var(--muted)}
+.statement-page del{color:var(--muted);text-decoration:line-through}
+.statement-page ins{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--ink);text-underline-offset:4px}
+.statement-page .statement-translation{margin:0 0 8px;font-size:16px}
+.statement-vote{border-top:1px solid var(--line);padding-top:4px}
+.statement-page .statement-dissent{color:var(--muted)}
+.statement-page details{font-size:16px;margin:20px 0;border-block:1px solid var(--line)}
+.statement-unchanged summary{min-height:44px;padding:10px 0;font-size:16px;cursor:pointer}
+.statement-unchanged ol{padding-left:24px}.statement-sentence{padding:14px 0;border-top:1px solid var(--line)}.statement-sentence p:last-child{margin-bottom:0}
+.statement-page .statement-sources{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:22px}
+.statement-source-item{white-space:nowrap}
+.banks .statement-link{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+/* The statement route also keeps the shared chrome at the readable/touch floor. */
+body:has(.statement-page) .lang-switch a,body:has(.statement-page) .lang-switch span{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+body:has(.statement-page) .site-footer a,body:has(.statement-page) .site-header nav a{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+body:has(.statement-page) .site-footer,body:has(.statement-page) .site-footer .label,body:has(.statement-page) .site-footer p,body:has(.statement-page) .brand-caption{font-size:14px}
