@@ -9,15 +9,32 @@ const TRADITIONAL = {
   '成功': '成功', '刚刚': '剛剛', '{n} 分钟前': '{n} 分鐘前', '{n} 小时前': '{n} 小時前', '{n} 天前': '{n} 天前', '{n} 分钟后': '{n} 分鐘後',
   '{n} 小时后': '{n} 小時後', '{n} 天后': '{n} 天後', '后': '後', '即将': '即將',
   '即将公布': '即將公布', '分后': '分後', '小时': '小時', '分': '分', '天后': '天後',
-  '已到时间，以官方公布为准': '已到時間，以官方公布為準'};
+  '已到时间，以官方公布为准': '已到時間，以官方公布為準', '复制': '複製', '已复制': '已複製'};
 /* en/ pages only show relative times from this script for now. */
 const ENGLISH = {
   '成功': 'success', '刚刚': 'just now', '即将': 'soon', '{n} 分钟前': '{n} min ago', '{n} 小时前': '{n} h ago', '{n} 天前': '{n} days ago',
   '{n} 分钟后': 'in {n} min', '{n} 小时后': 'in {n} h', '{n} 天后': 'in {n} days',
   '即将公布': 'Due soon', '分后': ' min remaining', '小时': ' h ', '分': ' min ', '后': 'remaining',
-  '天后': ' days remaining', '已到时间，以官方公布为准': 'Scheduled time reached; check the official release'};
+  '天后': ' days remaining', '已到时间，以官方公布为准': 'Scheduled time reached; check the official release', '复制': 'Copy', '已复制': 'Copied'};
 const PAGE_LANG = document.documentElement.lang;
 const T = (text) => (PAGE_LANG.startsWith('zh-Hant') && TRADITIONAL[text]) || (PAGE_LANG === 'en' && ENGLISH[text]) || text;
+/* Cite the visible line only. Clipboard access happens exclusively on a reader's click. */
+document.querySelectorAll('.cite-copy').forEach((button) => {
+  if (typeof navigator.clipboard?.writeText !== 'function') return;
+  const line = button.closest('.page-citation').querySelector('.cite-text');
+  if (!line) return;
+  let timer;
+  button.textContent = T('复制');
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(line.textContent);
+      clearTimeout(timer);
+      button.textContent = T('已复制');
+      timer = setTimeout(() => { button.textContent = T('复制'); }, 2000);
+    } catch (_) { /* Denied clipboard access leaves the readable citation intact. */ }
+  });
+});
 /* Follows are a local browser preference, shared by home/calendar and language trees. */
 const FOLLOW_KEY = 'heron-atlas-follows-v1';
 const FOLLOW_DEFAULT = ['us', 'ea', 'jp', 'uk', 'cn'];

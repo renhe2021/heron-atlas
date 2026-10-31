@@ -197,8 +197,17 @@ nav a{font-size:14px;padding-block:10px;display:inline-block}.site-header nav{ga
 .statement-unchanged ol{padding-left:24px}.statement-sentence{padding:14px 0;border-top:1px solid var(--line)}.statement-sentence p:last-child{margin-bottom:0}
 .statement-page .statement-sources{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:22px}
 .statement-source-item{white-space:nowrap}
+.statement-page .statement-note{font-size:14px;color:var(--muted);margin:0 0 12px}
+.statement-group del,.statement-group ins{text-decoration:none;font-weight:inherit}
+.statement-group{margin:0;padding-left:24px}.statement-group li{margin-bottom:16px}.statement-group li:last-child{margin-bottom:0}
 .banks .statement-link{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
 /* The statement route also keeps the shared chrome at the readable/touch floor. */
 body:has(.statement-page) .lang-switch a,body:has(.statement-page) .lang-switch span{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
 body:has(.statement-page) .site-footer a,body:has(.statement-page) .site-header nav a{font-size:14px;min-height:44px;display:inline-flex;align-items:center}
 body:has(.statement-page) .site-footer,body:has(.statement-page) .site-footer .label,body:has(.statement-page) .site-footer p,body:has(.statement-page) .brand-caption{font-size:14px}
+/* Citations stay readable without scripting; enhancement only reveals the copy control. */
+.page-citation {font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:22px;margin-bottom:2rem;line-height:1.8;overflow-wrap:anywhere;}
+.cite-copy {font:inherit;color:inherit;background:transparent;border:1px solid currentColor;min-height:44px;min-width:44px;padding:0.35rem 0.75rem;cursor:pointer;}
+.cite-copy[hidden] {display:none;}
+.statement-history li {font-size:1rem;line-height:1.8;margin-block:0.5rem;}
+.statement-history a {display:inline-block;min-height:44px;padding-block:0.5rem;}
