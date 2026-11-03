@@ -57,12 +57,14 @@ const renderFollows = () => {
   });
   document.querySelectorAll('[data-follow-hint]').forEach((hint) => { hint.hidden = followState.saved; });
   let shown = false;
+  let visible = false;
   document.querySelectorAll('[data-home-candidate]').forEach((node) => {
     const match = !shown && followState.selected.has(node.getAttribute('data-home-candidate'));
-    node.hidden = !match;
+    node.hidden = !match && !node.hasAttribute('data-home-pinned');
     if (match) shown = true;
+    if (!node.hidden) visible = true;
   });
-  document.querySelectorAll('[data-home-empty]').forEach((node) => { node.hidden = shown; });
+  document.querySelectorAll('[data-home-empty]').forEach((node) => { node.hidden = visible; });
   document.querySelectorAll('[data-economy]').forEach((node) => {
     if (!node.closest('[data-filter-scope]')) node.hidden = !isFollowed(node);
   });
