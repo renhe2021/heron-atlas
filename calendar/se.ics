@@ -1,0 +1,72 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Heron Atlas//Key Events//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Heron Atlas 关键事件
+X-WR-TIMEZONE:Asia/Shanghai
+X-PUBLISHED-TTL:PT1H
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+BEGIN:VEVENT
+UID:se-cpi.se-cpi-2026-11-12@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20261112T070000Z
+DTEND:20261112T073000Z
+SUMMARY:瑞典 CPI 与 CPIF
+DESCRIPTION:北京时间 11月12日 15:00；以官方公布为准。 官方
+ 出处：https://www.scb.se/en/finding-statistics/publishing-calendar/
+URL:https://www.scb.se/en/finding-statistics/publishing-calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:se-cpi-flash.se-cpi-flash-2026-12-04@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20261204T070000Z
+DTEND:20261204T073000Z
+SUMMARY:瑞典 CPI 快速估算
+DESCRIPTION:北京时间 12月4日 15:00；以官方公布为准。 官方
+ 出处：https://www.scb.se/en/finding-statistics/publishing-calendar/
+URL:https://www.scb.se/en/finding-statistics/publishing-calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:se-cpi.se-cpi-2026-12-11@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20261211T070000Z
+DTEND:20261211T073000Z
+SUMMARY:瑞典 CPI 与 CPIF
+DESCRIPTION:北京时间 12月11日 15:00；以官方公布为准。 官方
+ 出处：https://www.scb.se/en/finding-statistics/publishing-calendar/
+URL:https://www.scb.se/en/finding-statistics/publishing-calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:se-riksbank-minutes.se-riksbank-minutes-2026-12-22@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20261222T083000Z
+DTEND:20261222T090000Z
+SUMMARY:瑞典央行会议纪要
+DESCRIPTION:北京时间 12月22日 16:30；以官方公布为准。 官方
+ 出处：https://www.riksbank.se/en-gb/press-and-published/calendar/calend
+ ar-2026/
+URL:https://www.riksbank.se/en-gb/press-and-published/calendar/calendar-202
+ 6/
+END:VEVENT
+BEGIN:VEVENT
+UID:se-cpi-flash.se-cpi-flash-2027-01-08@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20270108T070000Z
+DTEND:20270108T073000Z
+SUMMARY:瑞典 CPI 快速估算
+DESCRIPTION:北京时间 1月8日 15:00；以官方公布为准。 官方
+ 出处：https://www.scb.se/en/finding-statistics/publishing-calendar/
+URL:https://www.scb.se/en/finding-statistics/publishing-calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:se-cpi.se-cpi-2027-01-15@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20270115T070000Z
+DTEND:20270115T073000Z
+SUMMARY:瑞典 CPI 与 CPIF
+DESCRIPTION:北京时间 1月15日 15:00；以官方公布为准。 官方
+ 出处：https://www.scb.se/en/finding-statistics/publishing-calendar/
+URL:https://www.scb.se/en/finding-statistics/publishing-calendar/
+END:VEVENT
+END:VCALENDAR

@@ -9,13 +9,13 @@ const TRADITIONAL = {
   '成功': '成功', '刚刚': '剛剛', '{n} 分钟前': '{n} 分鐘前', '{n} 小时前': '{n} 小時前', '{n} 天前': '{n} 天前', '{n} 分钟后': '{n} 分鐘後',
   '{n} 小时后': '{n} 小時後', '{n} 天后': '{n} 天後', '后': '後', '即将': '即將',
   '即将公布': '即將公布', '分后': '分後', '小时': '小時', '分': '分', '天后': '天後',
-  '已到时间，以官方公布为准': '已到時間，以官方公布為準', '复制': '複製', '已复制': '已複製'};
+  '已到点 · 核验官方公报中': '已到點 · 核驗官方公報中', '已到公布时间，以官方公布为准': '已到公布時間，以官方公布為準', '复制': '複製', '已复制': '已複製'};
 /* en/ pages only show relative times from this script for now. */
 const ENGLISH = {
   '成功': 'success', '刚刚': 'just now', '即将': 'soon', '{n} 分钟前': '{n} min ago', '{n} 小时前': '{n} h ago', '{n} 天前': '{n} days ago',
   '{n} 分钟后': 'in {n} min', '{n} 小时后': 'in {n} h', '{n} 天后': 'in {n} days',
   '即将公布': 'Due soon', '分后': ' min remaining', '小时': ' h ', '分': ' min ', '后': 'remaining',
-  '天后': ' days remaining', '已到时间，以官方公布为准': 'Scheduled time reached; check the official release', '复制': 'Copy', '已复制': 'Copied'};
+  '天后': ' days remaining', '已到点 · 核验官方公报中': 'Due · checking the official release', '已到公布时间，以官方公布为准': 'Release time reached; the official release prevails', '复制': 'Copy', '已复制': 'Copied'};
 const PAGE_LANG = document.documentElement.lang;
 const T = (text) => (PAGE_LANG.startsWith('zh-Hant') && TRADITIONAL[text]) || (PAGE_LANG === 'en' && ENGLISH[text]) || text;
 /* Cite the visible line only. Clipboard access happens exclusively on a reader's click. */
@@ -38,7 +38,7 @@ document.querySelectorAll('.cite-copy').forEach((button) => {
 /* Follows are a local browser preference, shared by home/calendar and language trees. */
 const FOLLOW_KEY = 'heron-atlas-follows-v1';
 const FOLLOW_DEFAULT = ['us', 'ea', 'jp', 'uk', 'cn'];
-const FOLLOW_ALLOWED = new Set([...FOLLOW_DEFAULT, 'ca', 'au', 'ch', 'se']);
+const FOLLOW_ALLOWED = new Set([...FOLLOW_DEFAULT, 'ca', 'au', 'ch', 'se', 'nz', 'no']);
 const readFollows = () => {
   try {
     const raw = window.localStorage.getItem(FOLLOW_KEY);
@@ -56,15 +56,26 @@ const renderFollows = () => {
     chip.setAttribute('aria-pressed', String(followState.selected.has(chip.getAttribute('data-follow-economy'))));
   });
   document.querySelectorAll('[data-follow-hint]').forEach((hint) => { hint.hidden = followState.saved; });
-  let shown = false;
-  document.querySelectorAll('[data-home-candidate]').forEach((node) => {
-    const match = !shown && (followState.selected.has(node.getAttribute('data-home-candidate')) || node.hasAttribute('data-home-pinned'));
-    node.hidden = !match;
-    if (match) shown = true;
-  });
-  document.querySelectorAll('[data-home-empty]').forEach((node) => { node.hidden = shown; });
   document.querySelectorAll('[data-economy]').forEach((node) => {
-    if (!node.closest('[data-filter-scope]')) node.hidden = !isFollowed(node);
+    if (!node.closest('[data-filter-scope]') && !node.closest('[data-home-window]')) node.hidden = !isFollowed(node);
+  });
+  document.querySelectorAll('[data-follow-summary]').forEach((node) => {
+    try {
+      const labels = JSON.parse(node.getAttribute('data-economy-labels'));
+      node.textContent = [...followState.selected].map(e => labels[e]).filter(Boolean).join(node.getAttribute('data-separator') || '、') || node.getAttribute('data-empty') || '—';
+    } catch (_) { /* Keep the deterministic default summary if labels are absent. */ }
+  });
+  document.querySelectorAll('[data-home-window]').forEach((section) => {
+    const button = section.querySelector('[data-window-all]');
+    const all = button?.getAttribute('aria-pressed') === 'true';
+    const rows = [...section.querySelectorAll('[data-economy]')];
+    rows.forEach(node => { node.hidden = !all && !isFollowed(node); });
+    const empty = section.querySelector('[data-window-empty]');
+    if (empty) empty.hidden = rows.some(node => !node.hidden);
+    if (button) {
+      button.hidden = false;
+      button.textContent = button.getAttribute(all ? 'data-show-followed' : 'data-show-all');
+    }
   });
   document.dispatchEvent(new Event('heron:follows-change'));
 };
@@ -85,6 +96,12 @@ window.addEventListener('storage', (event) => {
     followState = readFollows();
     renderFollows();
   }
+});
+document.querySelectorAll('[data-window-all]').forEach((button) => {
+  button.addEventListener('click', () => {
+    button.setAttribute('aria-pressed', String(button.getAttribute('aria-pressed') !== 'true'));
+    renderFollows();
+  });
 });
 renderFollows();
 (() => {
@@ -163,6 +180,7 @@ renderFollows();
     return (ahead ? T('{n} 天后') : T('{n} 天前')).replace('{n}', Math.round(hours / 24));
   };
   const update = () => {
+    if (document.hidden) return;
     const now = Date.now();
     nodes.forEach((node) => {
       const at = Date.parse(node.getAttribute('datetime'));
@@ -172,7 +190,8 @@ renderFollows();
     });
   };
   update();
-  setInterval(update, 60000);
+  setInterval(update, 30000);
+  document.addEventListener('visibilitychange', update);
 })();
 
 
@@ -204,11 +223,22 @@ renderFollows();
       const at = Date.parse(node.getAttribute('data-countdown'));
       if (Number.isNaN(at)) return;
       const left = at - now;
-      node.textContent = left > 0 ? label(left) : PAGE_LANG === 'en' ? 'Time reached; the official release prevails' : T('已到时间，以官方公布为准');
+      node.textContent = left > 0 ? label(left) : T('已到点 · 核验官方公报中');
+      if (left <= 0) node.title = T('已到公布时间，以官方公布为准');
       node.classList.toggle('is-past', left <= 0);
     });
   };
+  let deadlineTimer;
+  const scheduleDeadline = () => {
+    clearTimeout(deadlineTimer);
+    if (document.hidden) return;
+    const now = Date.now();
+    const upcoming = nodes.map(node => Date.parse(node.getAttribute('data-countdown'))).filter(at => Number.isFinite(at) && at > now);
+    if (!upcoming.length) return;
+    deadlineTimer = setTimeout(() => { update(); scheduleDeadline(); }, Math.min(Math.min(...upcoming) - now, 2147483647));
+  };
   update();
+  scheduleDeadline();
   setInterval(update, 30000);
-  document.addEventListener('visibilitychange', update);
+  document.addEventListener('visibilitychange', () => { update(); scheduleDeadline(); });
 })();

@@ -1,0 +1,72 @@
+/* Screenshot-only light canvases. 1cqw = 10.8px on the native 1080px canvas. */
+@font-face { font-family: "Atlas Display"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Atlas Serif SC"; src: url("assets/fonts/NotoSerifSC-subset.woff2") format("woff2"); font-display: swap; }
+:root { color-scheme: light; --paper: #FAF8F5; --ink: #111111; --rule: #E4E1DA; --muted: #605E59; --insert: #126347; --insert-bg: #E8F2EB; --delete: #9D2339; --delete-bg: #FAE9ED; --sans: system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; --serif: "Atlas Display","Atlas Serif SC","Songti SC","STSong","Noto Serif CJK SC",Georgia,serif; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: .14em; }
+.studio-frame { width: 1080px; max-width: 100%; container-type: inline-size; }
+.studio-card { width: 100%; height: 133.333333cqw; aspect-ratio: 3 / 4; padding: 5.925926cqw; display: flex; flex-direction: column; gap: 1.481481cqw; font-size: 2.592593cqw; line-height: 1.35; background: var(--paper); color: var(--ink); }
+.studio-card[data-card-ratio="9x16"] { height: 177.777778cqw; aspect-ratio: 9 / 16; }
+.studio-card p, .studio-card h1, .studio-card h2 { margin: 0; }
+.studio-card-header { border-top: 2px solid var(--ink); padding-top: 1.481481cqw; }
+.studio-eyebrow { color: var(--muted); margin-bottom: 1.111111cqw !important; letter-spacing: .04em; }
+.studio-card h1 { font: 500 4.629630cqw/1.25 var(--serif); letter-spacing: -.025em; margin-bottom: 1.111111cqw; }
+.studio-dates, .studio-counts { margin-top: .740741cqw !important; }
+.status-chip { display: inline-block; border: 1px solid var(--ink); padding: .277778cqw .740741cqw; margin-top: .740741cqw !important; color: var(--ink); background: transparent; }
+.num, time, .studio-counts { font-variant-numeric: tabular-nums lining-nums; }
+.num { white-space: nowrap; }
+.studio-changes { display: flex; flex-direction: column; gap: 1.111111cqw; }
+.studio-change { border-top: 1px solid var(--rule); padding-top: .740741cqw; }
+.studio-card h2 { font: 600 2.592593cqw/1.35 var(--sans); margin-bottom: .555556cqw; }
+.studio-side { color: var(--muted); }
+.studio-translation { margin-top: .370370cqw !important; }
+.studio-sentence:not(:first-of-type) { margin-top: .555556cqw !important; }
+.studio-note { border-left: 2px solid var(--ink); padding-left: .740741cqw; margin-top: .370370cqw !important; }
+del { color: var(--delete); background: var(--delete-bg); text-decoration: line-through; }
+ins { color: var(--insert); background: var(--insert-bg); text-decoration: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); white-space: nowrap; }
+.studio-official-sources { display: flex; gap: 2.222222cqw; }
+.studio-truncated { border-top: 1px solid var(--rule); padding-top: .740741cqw; overflow-wrap: anywhere; }
+.studio-footer { margin-top: auto; border-top: 1px solid var(--ink); padding-top: 1.111111cqw; min-height: 20.370371cqw; display: grid; grid-template-columns: minmax(0, 1fr) 11.851852cqw; gap: 1.481481cqw; align-items: end; flex-shrink: 0; }
+.studio-footer-copy { display: flex; flex-direction: column; gap: .370370cqw; min-width: 0; }
+.studio-source-page { overflow-wrap: anywhere; }
+.studio-brand { font-weight: 600; }
+.studio-qr { width: 11.851852cqw; height: 11.851852cqw; display: grid; place-items: center; align-self: end; }
+.studio-qr img { width: 100%; height: 100%; object-fit: contain; }
+.studio-qr-placeholder { border: 1px dashed var(--muted); text-align: center; color: var(--muted); }
+.studio-signed-statement { font-size: 3.333333cqw; line-height: 1.5; }
+.studio-verdict { margin-top: 1.111111cqw !important; font-weight: 600; }
+.studio-baseline, .studio-result { border-top: 1px solid var(--rule); padding-top: 1.111111cqw; }
+.studio-result p + p { margin-top: .740741cqw; }
+.studio-times { border-top: 1px solid var(--rule); padding-top: 1.111111cqw; }
+.studio-times p { display: grid; grid-template-columns: 25% minmax(0, 1fr); gap: .740741cqw; }
+.studio-times p + p { margin-top: .740741cqw; }
+.studio-index { max-width: 1000px; padding: 32px; font-size: 18px; line-height: 1.7; }
+.studio-index h1 { font-family: var(--serif); font-weight: 500; }
+.studio-index ul { list-style: none; padding: 0; }
+.studio-index li { border-top: 1px solid var(--rule); padding-block: 16px; }
+.studio-index h3, .studio-index p { margin: 0; }
+.studio-index a { display: inline-flex; align-items: center; min-height: 44px; padding-right: 18px; }
+@media (min-width: 1080px) {
+  .studio-card { width: 1080px; height: 1440px; padding: 64px; font-size: 28px; }
+  .studio-card[data-card-ratio="9x16"] { height: 1920px; }
+  .studio-footer { min-height: 220px; }
+}
+
+/* Content remains indivisible while the fonts-ready fitter measures candidates. */
+.studio-card > * { flex-shrink: 0; }
+.studio-card [hidden] { display: none; }
+.studio-index a { min-width: 44px; }
+.studio-card[data-card-ratio="9x16"] { gap: 2.592593cqw; }
+.studio-judgment[data-card-ratio="9x16"] h1 { font-size: 6.666667cqw; margin-bottom: 2.222222cqw; }
+.studio-judgment[data-card-ratio="9x16"] .studio-signed-statement { font-family: var(--serif); font-size: 5.185185cqw; line-height: 1.45; }
+.studio-judgment[data-card-ratio="9x16"] .studio-verdict,
+.studio-judgment[data-card-ratio="9x16"] .status-chip { font-size: 3.703704cqw; line-height: 1.3; }
+.studio-judgment[data-card-ratio="9x16"] .studio-verdict { margin-top: 2.222222cqw !important; }
+.studio-judgment[data-card-ratio="9x16"] .studio-baseline { font-size: 2.962963cqw; line-height: 1.5; }
+.studio-judgment[data-card-ratio="9x16"] .studio-result { font-size: 3.333333cqw; line-height: 1.45; }
+.studio-judgment[data-card-ratio="9x16"] .studio-times { font-size: 2.777778cqw; line-height: 1.5; }
+.studio-judgment[data-card-ratio="9x16"] .studio-times p + p { margin-top: 1.481481cqw; }
+.studio-diff[data-card-ratio="9x16"] .studio-sentence { font-size: 3.148148cqw; line-height: 1.35; }
+.studio-diff[data-card-ratio="9x16"] .studio-translation { font-size: 2.777778cqw; line-height: 1.4; }

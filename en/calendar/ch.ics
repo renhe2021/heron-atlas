@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Heron Atlas//Key Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Heron Atlas key events
+X-WR-TIMEZONE:Asia/Shanghai
+X-PUBLISHED-TTL:PT1H
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+BEGIN:VEVENT
+UID:ch-cpi.ch-cpi-2026-12-02@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20261202T073000Z
+DTEND:20261202T080000Z
+SUMMARY:Switzerland CPI
+DESCRIPTION:2026-12-02 15:30 Beijing time\; the official release prevails. 
+ Official source: https://www.statistik.admin.ch/de/agenda/2026-0060
+URL:https://www.statistik.admin.ch/de/agenda/2026-0060
+END:VEVENT
+BEGIN:VEVENT
+UID:ch-cpi.ch-cpi-2027-01-05@heron-atlas
+DTSTAMP:20261111T173748Z
+DTSTART:20270105T073000Z
+DTEND:20270105T080000Z
+SUMMARY:Switzerland CPI
+DESCRIPTION:2027-01-05 15:30 Beijing time\; the official release prevails. 
+ Official source: https://www.statistik.admin.ch/de/agenda/2026-0060
+URL:https://www.statistik.admin.ch/de/agenda/2026-0060
+END:VEVENT
+END:VCALENDAR
