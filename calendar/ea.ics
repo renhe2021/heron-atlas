@@ -9,7 +9,7 @@ X-PUBLISHED-TTL:PT1H
 REFRESH-INTERVAL;VALUE=DURATION:PT1H
 BEGIN:VEVENT
 UID:ea-gdp-flash.ea-gdp-flash-2026-11-13@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20261113T100000Z
 DTEND:20261113T103000Z
 SUMMARY:欧元区 GDP 快速估算
@@ -20,7 +20,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-hicp-final.ea-hicp-final-2026-11-18@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20261118T100000Z
 DTEND:20261118T103000Z
 SUMMARY:欧元区 HICP 通胀终值
@@ -31,7 +31,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-hicp-flash.ea-hicp-flash-2026-12-01@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20261201T100000Z
 DTEND:20261201T103000Z
 SUMMARY:欧元区 HICP 通胀初值
@@ -42,7 +42,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-unemployment.ea-unemployment-2026-12-02@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20261202T100000Z
 DTEND:20261202T103000Z
 SUMMARY:欧元区失业率
@@ -53,7 +53,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-hicp-final.ea-hicp-final-2026-12-17@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20261217T100000Z
 DTEND:20261217T103000Z
 SUMMARY:欧元区 HICP 通胀终值
@@ -64,7 +64,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-hicp-flash.ea-hicp-flash-2027-01-06@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20270106T100000Z
 DTEND:20270106T103000Z
 SUMMARY:欧元区 HICP 通胀初值
@@ -75,7 +75,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-unemployment.ea-unemployment-2027-01-07@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20270107T100000Z
 DTEND:20270107T103000Z
 SUMMARY:欧元区失业率
@@ -86,7 +86,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-hicp-final.ea-hicp-final-2027-01-19@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20270119T100000Z
 DTEND:20270119T103000Z
 SUMMARY:欧元区 HICP 通胀终值
@@ -97,7 +97,7 @@ URL:https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ea-gdp-flash.ea-gdp-flash-2027-01-29@heron-atlas
-DTSTAMP:20261114T120556Z
+DTSTAMP:20261114T123712Z
 DTSTART:20270129T100000Z
 DTEND:20270129T103000Z
 SUMMARY:欧元区 GDP 快速估算
