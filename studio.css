@@ -70,3 +70,8 @@ ins { color: var(--insert); background: var(--insert-bg); text-decoration: none;
 .studio-judgment[data-card-ratio="9x16"] .studio-times p + p { margin-top: 1.481481cqw; }
 .studio-diff[data-card-ratio="9x16"] .studio-sentence { font-size: 3.148148cqw; line-height: 1.35; }
 .studio-diff[data-card-ratio="9x16"] .studio-translation { font-size: 2.777778cqw; line-height: 1.4; }
+/* Accessible annotations live outside quoted source text. */
+del[data-cue]{background:var(--delete-bg);color:var(--delete);text-decoration:line-through}
+ins[data-cue]{background:var(--insert-bg);color:var(--insert);font-weight:700;text-decoration:none}
+del[data-cue]::before,ins[data-cue]::before{content:attr(data-cue) " ";position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.diff-legend{font-size:.875rem;line-height:1.8}

@@ -9,15 +9,35 @@ const TRADITIONAL = {
   '成功': '成功', '刚刚': '剛剛', '{n} 分钟前': '{n} 分鐘前', '{n} 小时前': '{n} 小時前', '{n} 天前': '{n} 天前', '{n} 分钟后': '{n} 分鐘後',
   '{n} 小时后': '{n} 小時後', '{n} 天后': '{n} 天後', '后': '後', '即将': '即將',
   '即将公布': '即將公布', '分后': '分後', '小时': '小時', '分': '分', '天后': '天後',
-  '已到点 · 核验官方公报中': '已到點 · 核驗官方公報中', '已到公布时间，以官方公布为准': '已到公布時間，以官方公布為準', '复制': '複製', '已复制': '已複製'};
+  '已到点 · 官方数据核验中': '已到點 · 官方數據核驗中',
+  '未来 72 小时内没有关键日程，以下是随后最近的三项。': '未來 72 小時內沒有關鍵日程，以下是隨後最近的三項。',
+  '关注的经济体在此窗口内没有日程，已显示全部经济体。': '關注的經濟體在此窗口內沒有日程，已顯示全部經濟體。', '下一项：': '下一項：', '已到公布时间，以官方公布为准': '已到公布時間，以官方公布為準', '复制': '複製', '已复制': '已複製'};
 /* en/ pages only show relative times from this script for now. */
 const ENGLISH = {
   '成功': 'success', '刚刚': 'just now', '即将': 'soon', '{n} 分钟前': '{n} min ago', '{n} 小时前': '{n} h ago', '{n} 天前': '{n} days ago',
   '{n} 分钟后': 'in {n} min', '{n} 小时后': 'in {n} h', '{n} 天后': 'in {n} days',
   '即将公布': 'Due soon', '分后': ' min remaining', '小时': ' h ', '分': ' min ', '后': 'remaining',
-  '天后': ' days remaining', '已到点 · 核验官方公报中': 'Due · checking the official release', '已到公布时间，以官方公布为准': 'Release time reached; the official release prevails', '复制': 'Copy', '已复制': 'Copied'};
+  '天后': ' days remaining', '已到点 · 官方数据核验中': 'Due · verifying official data',
+  '未来 72 小时内没有关键日程，以下是随后最近的三项。': 'No key releases in the next 72 hours; the next three follow.',
+  '关注的经济体在此窗口内没有日程，已显示全部经济体。': 'No events for your followed economies in this window; showing all economies.', '下一项：': 'Next: ', '已到公布时间，以官方公布为准': 'Release time reached; the official release prevails', '复制': 'Copy', '已复制': 'Copied'};
 const PAGE_LANG = document.documentElement.lang;
 const T = (text) => (PAGE_LANG.startsWith('zh-Hant') && TRADITIONAL[text]) || (PAGE_LANG === 'en' && ENGLISH[text]) || text;
+const countdownLabel = (ms) => {
+    const minutes = Math.floor(ms / 60000);
+    if (PAGE_LANG === 'en') {
+      if (minutes < 1) return 'soon';
+      if (minutes < 60) return 'in ' + minutes + ' min';
+      const h = Math.floor(minutes / 60);
+      if (h < 48) return 'in ' + h + ' h' + (minutes % 60 ? ' ' + (minutes % 60) + ' min' : '');
+      return 'in ' + Math.floor(h / 24) + ' days';
+    }
+    if (minutes < 1) return T('即将公布');
+    if (minutes < 60) return minutes + T('分后');
+    const hours = Math.floor(minutes / 60);
+    const rest = minutes % 60;
+    if (hours < 48) return hours + T('小时') + (rest ? rest + T('分') : '') + T('后');
+    return Math.floor(hours / 24) + T('天后');
+  };
 /* Cite the visible line only. Clipboard access happens exclusively on a reader's click. */
 document.querySelectorAll('.cite-copy').forEach((button) => {
   if (typeof navigator.clipboard?.writeText !== 'function') return;
@@ -50,6 +70,7 @@ const readFollows = () => {
   return {selected: new Set(FOLLOW_DEFAULT), saved: false};
 };
 let followState = readFollows();
+let updateRollingWindows = () => {};
 const isFollowed = (node) => !node.hasAttribute('data-economy') || followState.selected.has(node.getAttribute('data-economy'));
 const renderFollows = () => {
   document.querySelectorAll('[data-follow-economy]').forEach((chip) => {
@@ -65,7 +86,7 @@ const renderFollows = () => {
       node.textContent = [...followState.selected].map(e => labels[e]).filter(Boolean).join(node.getAttribute('data-separator') || '、') || node.getAttribute('data-empty') || '—';
     } catch (_) { /* Keep the deterministic default summary if labels are absent. */ }
   });
-  document.querySelectorAll('[data-home-window]').forEach((section) => {
+  document.querySelectorAll('[data-home-window]:not([data-rolling-window])').forEach((section) => {
     const button = section.querySelector('[data-window-all]');
     const all = button?.getAttribute('aria-pressed') === 'true';
     const rows = [...section.querySelectorAll('[data-economy]')];
@@ -77,6 +98,7 @@ const renderFollows = () => {
       button.textContent = button.getAttribute(all ? 'data-show-followed' : 'data-show-all');
     }
   });
+  updateRollingWindows();
   document.dispatchEvent(new Event('heron:follows-change'));
 };
 document.querySelectorAll('[data-follow-economy]').forEach((chip) => {
@@ -104,6 +126,158 @@ document.querySelectorAll('[data-window-all]').forEach((button) => {
   });
 });
 renderFollows();
+/* A cached page carries one bounded absolute schedule. Roll only within that
+   snapshot; no browser network request, build-time countdown, or guessed result. */
+(() => {
+  const sections = [...document.querySelectorAll('[data-rolling-window]')].map(section => ({
+    section,
+    entries: [...section.querySelectorAll('[data-window-item]')].map(node => ({node, at: Date.parse(node.getAttribute('data-at'))}))
+      .filter(row => Number.isFinite(row.at)).sort((a, b) => a.at - b.at),
+    keyOnly: section.hasAttribute('data-key-window')
+  }));
+  if (!sections.length) return;
+  let deadlineTimer;
+  const render = () => {
+    if (document.hidden) return;
+    const now = Date.now();
+    sections.forEach(({section, entries, keyOnly}) => {
+      for (let i = entries.length - 1; i >= 0; i -= 1) {
+        if (entries[i].at < now - 3600000) { entries[i].node.remove(); entries.splice(i, 1); }
+      }
+      const all = entries.filter(row => !keyOnly || row.node.getAttribute('data-tier') === '1');
+      section.hidden = all.length === 0;
+      const card = keyOnly ? section.closest('.ledger-next-window') : null;
+      if (card) card.hidden = all.length === 0;
+      const future = all.filter(row => row.at > now);
+      const inside = keyOnly ? all : all.filter(row => now - 3600000 <= row.at && row.at <= now + 72 * 3600000);
+      const fallback = !keyOnly && inside.length === 0;
+      const candidates = fallback ? future : inside;
+      const followed = candidates.filter(row => isFollowed(row.node));
+      const followingFallback = candidates.length > 0 && (followed.length === 0 || keyOnly && future.length > 0 && !future.some(row => isFollowed(row.node)));
+      const chosen = followingFallback ? candidates : followed.length ? followed : candidates;
+      const keyVisible = keyOnly ? [...chosen.filter(row => row.at <= now), ...chosen.filter(row => row.at > now).slice(0, 1)] : [];
+      const visible = new Set((keyOnly ? keyVisible : fallback ? chosen.slice(0, 3) : chosen).map(row => row.node));
+      entries.forEach(({node, at}) => {
+        node.hidden = !visible.has(node);
+        const status = node.querySelector('[data-window-status]');
+        if (status) status.textContent = at <= now ? T('已到点 · 官方数据核验中') : '';
+        const countdown = node.querySelector('[data-key-countdown]');
+        if (countdown) countdown.textContent = at > now && !node.hasAttribute('data-date') ? countdownLabel(at - now) : '';
+      });
+      const note = section.querySelector('[data-window-note]');
+      if (note) {
+        note.textContent = T('未来 72 小时内没有关键日程，以下是随后最近的三项。');
+        note.hidden = !fallback || !future.length;
+      }
+      const followNote = section.querySelector('[data-window-follow-note]');
+      if (followNote) {
+        followNote.textContent = T('关注的经济体在此窗口内没有日程，已显示全部经济体。');
+        followNote.hidden = !followingFallback;
+      }
+      const next = section.querySelector('[data-window-next]');
+      if (next) {
+        const followedFuture = future.filter(row => isFollowed(row.node));
+        const first = (followingFallback ? future : followedFuture.length ? followedFuture : future)[0];
+        next.hidden = !first;
+        next.textContent = first ? T('下一项：') + (first.node.querySelector('[data-window-name]')?.textContent || '') + ' · ' + (first.node.querySelector('time')?.textContent || '') : '';
+      }
+      if (!keyOnly) {
+        const followedFuture = future.filter(row => isFollowed(row.node));
+        const first = (followingFallback ? future : followedFuture.length ? followedFuture : future)[0];
+        document.querySelectorAll('[data-rolling-pulse]').forEach(pulse => {
+          const name = pulse.querySelector('[data-window-pulse-name]');
+          const time = pulse.querySelector('[data-window-pulse-time]');
+          const feed = pulse.querySelector('[data-window-pulse-feed]');
+          pulse.hidden = !first;
+          if (!first) return;
+          const source = first.node.querySelector('a');
+          if (name) {
+            name.textContent = first.node.querySelector('[data-window-name]')?.textContent || first.node.textContent.trim();
+            if (source) name.setAttribute('href', source.getAttribute('href'));
+          }
+          if (time) {
+            const absolute = first.node.querySelector('time')?.cloneNode(true);
+            const remaining = document.createElement('span');
+            remaining.className = 'pulse-remaining pulse-countdown num';
+            remaining.textContent = first.node.hasAttribute('data-date') ? '' : countdownLabel(first.at - now);
+            // Preserve the official-source control while rolling its timestamp.
+            const linkedTime = time.querySelector('a');
+            if (linkedTime) {
+              if (source) linkedTime.setAttribute('href', source.getAttribute('href'));
+              linkedTime.classList.add('pulse-absolute');
+              linkedTime.replaceChildren(...(absolute ? [absolute] : []));
+            }
+            time.removeAttribute('data-countdown');
+            if (absolute && !linkedTime) absolute.classList.add('pulse-absolute');
+            time.replaceChildren(...(absolute ? [linkedTime || absolute] : []), remaining);
+          }
+          if (feed) {
+            const economy = first.node.getAttribute('data-economy');
+            feed.setAttribute('href', 'calendar/' + (FOLLOW_ALLOWED.has(economy) ? economy : 'key-events') + '.ics');
+            feed.hidden = false;
+          }
+        });
+      }
+    });
+  };
+  const scheduleDeadline = () => {
+    clearTimeout(deadlineTimer);
+    if (document.hidden) return;
+    const now = Date.now();
+    // Wake exactly on due, window entry, and expiry; +1 preserves the inclusive
+    // sixty-minute boundary and removes the row immediately afterwards.
+    const instants = sections.flatMap(({entries}) => entries.flatMap(({at}) => [at, at - 72 * 3600000, at + 3600000 + 1]))
+      .filter(at => at > now);
+    if (instants.length) deadlineTimer = setTimeout(() => { render(); scheduleDeadline(); }, Math.min(Math.min(...instants) - now, 2147483647));
+  };
+  updateRollingWindows = () => { render(); scheduleDeadline(); };
+  updateRollingWindows();
+  setInterval(render, 30000);
+  document.addEventListener('visibilitychange', updateRollingWindows);
+})();
+/* The source keeps every statement panel readable without JavaScript. */
+(() => {
+  document.querySelectorAll('[data-diff-tabs]').forEach(section => {
+    const tabs = [...section.querySelectorAll('[data-diff-bank]')];
+    const pairs = tabs.map(tab => ({tab, panel: document.getElementById(tab.getAttribute('href')?.slice(1))}))
+      .filter(pair => pair.panel && section.contains(pair.panel));
+    if (!pairs.length) return;
+    const nav = pairs[0].tab.parentElement;
+    nav.setAttribute('role', 'tablist');
+    const activate = (index, focus = false) => {
+      pairs.forEach(({tab, panel}, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.setAttribute('tabindex', i === index ? '0' : '-1');
+        panel.hidden = i !== index;
+      });
+      if (focus) pairs[index].tab.focus();
+    };
+    pairs.forEach(({tab, panel}, i) => {
+      tab.id ||= 'tab-' + panel.id;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      tab.addEventListener('click', event => { event.preventDefault(); activate(i); });
+      tab.addEventListener('keydown', event => {
+        let index;
+        if (event.key === 'ArrowRight') index = (i + 1) % pairs.length;
+        else if (event.key === 'ArrowLeft') index = (i + pairs.length - 1) % pairs.length;
+        else if (event.key === 'Home') index = 0;
+        else if (event.key === 'End') index = pairs.length - 1;
+        else return;
+        event.preventDefault(); activate(index, true);
+      });
+    });
+    const fromHash = pairs.findIndex(({panel}) => '#' + panel.id === window.location.hash);
+    const defaultIndex = pairs.findIndex(({tab}) => tab.getAttribute('data-diff-bank') === section.getAttribute('data-default-bank'));
+    activate(fromHash >= 0 ? fromHash : defaultIndex >= 0 ? defaultIndex : 0);
+    window.addEventListener('hashchange', () => {
+      const index = pairs.findIndex(({panel}) => '#' + panel.id === window.location.hash);
+      if (index >= 0) activate(index);
+    });
+  });
+})();
 (() => {
   const normalize = (value) => value.normalize('NFKC').toLocaleLowerCase('zh-CN').trim();
   document.querySelectorAll('[data-filter-scope]').forEach((scope) => {
@@ -200,22 +374,6 @@ renderFollows();
 (() => {
   const nodes = Array.from(document.querySelectorAll('[data-countdown]'));
   if (!nodes.length) return;
-  const label = (ms) => {
-    const minutes = Math.floor(ms / 60000);
-    if (PAGE_LANG === 'en') {
-      if (minutes < 1) return 'soon';
-      if (minutes < 60) return 'in ' + minutes + ' min';
-      const h = Math.floor(minutes / 60);
-      if (h < 48) return 'in ' + h + ' h' + (minutes % 60 ? ' ' + (minutes % 60) + ' min' : '');
-      return 'in ' + Math.floor(h / 24) + ' days';
-    }
-    if (minutes < 1) return T('即将公布');
-    if (minutes < 60) return minutes + T('分后');
-    const hours = Math.floor(minutes / 60);
-    const rest = minutes % 60;
-    if (hours < 48) return hours + T('小时') + (rest ? rest + T('分') : '') + T('后');
-    return Math.floor(hours / 24) + T('天后');
-  };
   const update = () => {
     if (document.hidden) return;
     const now = Date.now();
@@ -223,7 +381,7 @@ renderFollows();
       const at = Date.parse(node.getAttribute('data-countdown'));
       if (Number.isNaN(at)) return;
       const left = at - now;
-      node.textContent = left > 0 ? label(left) : T('已到点 · 核验官方公报中');
+      node.textContent = left > 0 ? (node.hasAttribute('data-countdown-date') ? '' : countdownLabel(left)) : T('已到点 · 官方数据核验中');
       if (left <= 0) node.title = T('已到公布时间，以官方公布为准');
       node.classList.toggle('is-past', left <= 0);
     });

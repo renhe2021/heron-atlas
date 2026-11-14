@@ -383,3 +383,99 @@ a.judgment-card{display:block;width:100%}
   .policy-matrix table{min-width:350px}
   .policy-matrix-full table{min-width:800px}
 }
+/* Editorial evidence panels: quiet rules, fixed five-economy numeric columns. */
+.home .hero-kicker{font-size:.875rem;letter-spacing:.06em;margin:0 0 1rem}
+.home .hero-deck{font-size:1.125rem;line-height:1.8;max-width:48rem}
+.home .hero-sources,.diff-legend,.highlight-attribution{font-size:.875rem;line-height:1.8}
+.inflation-table{width:100%;border-collapse:collapse;font-size:.875rem}
+.inflation-table th,.inflation-table td{min-width:0;padding:.65rem .35rem;border-bottom:1px solid var(--line)}
+.inflation-table td,.policy-matrix td{font-variant-numeric:tabular-nums lining-nums}
+.inflation-table td:last-child,.policy-matrix td:nth-child(2),.policy-matrix td:nth-child(3),.policy-matrix td:nth-child(4){text-align:right}
+.matrix-only .policy-matrix{width:100%}
+.secondary-rate{display:block;font-size:.875rem;line-height:1.8}
+.diff-tabs{display:flex;flex-wrap:wrap;border-bottom:2px solid var(--ink);gap:.25rem}
+.diff-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:.4rem .85rem}
+.diff-tabs a[aria-selected=true]{font-weight:700;background:var(--surface)}
+.statement-highlight-bank{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.highlight-excerpt{border-left:2px solid var(--ink);padding-left:1rem;margin:1.25rem 0}
+.highlight-subtext{font-size:1rem;color:var(--ink);line-height:1.8}
+.statement-highlights .margin-gloss{font-size:1rem;color:var(--ink);line-height:1.8}
+/* Generated accessibility cues preserve quoted/copied source text. */
+del[data-cue]{background:var(--delete-bg);color:var(--delete);text-decoration:line-through}
+ins[data-cue]{background:var(--insert-bg);color:var(--insert);font-weight:700;text-decoration:none}
+del[data-cue]::before,ins[data-cue]::before{content:attr(data-cue) " ";position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.judgment-badge{display:inline-block;font-weight:700;font-size:.875rem;line-height:1.8;padding:.1rem .4rem}
+.judgment-badge-star{border:1px solid var(--ink);color:var(--ink);background:transparent}
+.ledger-heading{grid-column:1/-1}
+.dual-ledger>section{min-width:0}
+.inflation-table td,.policy-matrix td:nth-child(n+2){text-align:right}
+
+/* p1b: one full-height inflation reference beside three compact pulse answers. */
+.home-pulse.atlas-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"rate" "inflation" "divergence" "window"}
+.home-pulse .pulse-rate{grid-area:rate}
+.home-pulse .pulse-inflation{grid-area:inflation}
+.home-pulse .pulse-divergence{grid-area:divergence}
+.home-pulse .pulse-window{grid-area:window}
+.inflation-table p{margin:0}
+.inflation-reading-meta{display:block;font-size:.875rem;line-height:1.6;color:var(--muted)}
+.rate-metadata{display:block;font-size:.875rem;line-height:1.8;white-space:normal;contain:inline-size}
+.policy-matrix:not(.policy-matrix-full) table{table-layout:auto}
+.ledger-settled{display:grid;grid-template-columns:minmax(0,1fr);gap:0 24px}
+.ledger-settled>h3{grid-column:1/-1;margin-top:0}
+.settled-judgment{min-width:0;padding-block:20px;border-top:1px solid var(--rule)}
+.settled-judgment h4{margin-block:0 12px}
+.ledger-next-window{min-width:0;padding-block:26px;border-top:1px solid var(--rule)}
+.ledger-next-window>h3{margin-top:0}
+@media(min-width:1024px){
+  .home-pulse.atlas-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"inflation rate" "inflation divergence" "inflation window"}
+  .dual-ledger{grid-template-columns:minmax(0,2fr) minmax(0,1fr);column-gap:28px}
+  .dual-ledger>.ledger-settled{grid-column:1;grid-row:1;padding-inline:0;border-left:0}
+  .ledger-settled{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ledger-next-window{grid-column:2;grid-row:1;border-top:0;border-left:1px solid var(--rule);padding-left:28px}
+  .dual-ledger>.ledger-active{grid-column:1/-1;grid-row:2;padding-inline:0}
+}
+@media(max-width:700px){
+  .inflation-table{table-layout:fixed}
+  .inflation-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .inflation-table thead th{position:absolute;top:0;left:0;width:1px;height:1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%)}
+  .inflation-table tbody{display:block}
+  .inflation-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);grid-template-areas:"economy reading" "target gap";gap:0 .75rem;padding-block:.65rem;border-bottom:1px solid var(--rule)}
+  .inflation-table th,.inflation-table td{min-width:0;padding:.25rem 0;border-bottom:0}
+  .inflation-economy{grid-area:economy}
+  .inflation-reading{grid-area:reading}
+  .inflation-target{grid-area:target}
+  .inflation-gap{grid-area:gap}
+  .inflation-table .inflation-target{text-align:left}
+  .inflation-table td a{max-width:100%}
+  .pulse-inflation .table-scroll{overflow-x:visible}
+}
+
+/* p1c: compact source labels must not dictate intrinsic column widths. */
+.policy-matrix:not(.policy-matrix-full) th,.policy-matrix:not(.policy-matrix-full) td,.policy-matrix:not(.policy-matrix-full) td p{overflow-wrap:normal;word-break:normal}
+.policy-matrix:not(.policy-matrix-full) th,.policy-matrix:not(.policy-matrix-full) td{padding-inline:2px}
+.policy-matrix:not(.policy-matrix-full) td:first-child,.policy-matrix:not(.policy-matrix-full) td:first-child a{white-space:nowrap}
+.policy-matrix:not(.policy-matrix-full) .matrix-meeting{white-space:normal}
+/* p1f: centre the short glyphs as well as their unchanged 44px hit targets. */
+.policy-matrix:not(.policy-matrix-full) td:nth-child(3),.policy-matrix:not(.policy-matrix-full) td:nth-child(4){text-align:center}
+.policy-matrix:not(.policy-matrix-full) td:nth-child(3) a,.policy-matrix:not(.policy-matrix-full) td:nth-child(4) a{justify-content:center}
+.policy-matrix:not(.policy-matrix-full) .rate-metadata{padding-inline-start:8px}
+.policy-matrix:not(.policy-matrix-full) td:nth-child(5) p{padding-inline-start:3px}
+.home-pulse .pulse-window .pulse-absolute{display:block;font-size:16px;white-space:nowrap}
+.home-pulse .pulse-window .pulse-remaining{display:block;white-space:nowrap}
+.home-pulse .pulse-window .pulse-remaining.is-past{font-size:16px}
+
+/* p1d: leave room inside the narrow home matrix without shrinking its text. */
+@media(max-width:430px){
+  .policy-matrix:not(.policy-matrix-full) table{min-width:0;width:calc(100% - 4px)}
+  .policy-matrix:not(.policy-matrix-full) th,.policy-matrix:not(.policy-matrix-full) td{padding-inline:0}
+  .policy-matrix:not(.policy-matrix-full) th:nth-child(3),.policy-matrix:not(.policy-matrix-full) th:nth-child(4){width:auto}
+  .policy-matrix:not(.policy-matrix-full) [data-matrix-rate]>p>a{letter-spacing:-.02em}
+}
+
+/* p1g: compact English sort labels share the numeric data alignment. */
+html[lang="en"] .policy-matrix:not(.policy-matrix-full) th:nth-child(3) button,html[lang="en"] .policy-matrix:not(.policy-matrix-full) th:nth-child(4) button{text-align:center;width:100%}
+
+/* Compact matrix sort text follows the data column at every width. */
+.policy-matrix:not(.policy-matrix-full) th button{width:100%}
+.policy-matrix:not(.policy-matrix-full) th:nth-child(2) button,.policy-matrix:not(.policy-matrix-full) th:nth-child(5) button{text-align:right}
+.policy-matrix:not(.policy-matrix-full) th:nth-child(3) button,.policy-matrix:not(.policy-matrix-full) th:nth-child(4) button{text-align:center}

@@ -9,25 +9,25 @@ Heron Atlas is a public macro research desk: official central-bank statement cha
 - https://heronatlas.com/api/v1/central-banks.json: Verified policy rates, official sources and check dates (zh).
 - https://heronatlas.com/api/v1/en/calendar.json: Key-event ICS entries; instants UTC, date-only entries have no invented time (en).
 - https://heronatlas.com/api/v1/en/central-banks.json: Verified policy rates, official sources and check dates (en).
-- https://heronatlas.com/api/v1/en/home.json: Home policy facts, the next 72 hours, statement changes and the complete judgment ledger (en).
-- https://heronatlas.com/api/v1/en/judgments.json: The existing public judgment ledger (format 1) (en).
+- https://heronatlas.com/api/v1/en/home.json: Home schema_version=2: editorial regime hero, core-five policy facts, 21-day rolling calendar, statement highlights and signed ledger (en).
+- https://heronatlas.com/api/v1/en/judgments.json: Signed judgment ledger (format 1), with evidence-based outcome badges (en).
 - https://heronatlas.com/api/v1/en/statements/ecb.json: Adjacent statement pairs and sentence changes for ecb (en).
 - https://heronatlas.com/api/v1/en/statements/fed.json: Adjacent statement pairs and sentence changes for fed (en).
 - https://heronatlas.com/api/v1/events.json: Approved event pages, facts, results and official references (zh).
-- https://heronatlas.com/api/v1/home.json: Home policy facts, the next 72 hours, statement changes and the complete judgment ledger (zh).
+- https://heronatlas.com/api/v1/home.json: Home schema_version=2: editorial regime hero, core-five policy facts, 21-day rolling calendar, statement highlights and signed ledger (zh).
 - https://heronatlas.com/api/v1/index.json: Schema, endpoint catalogue, page citation dates and freshness (all).
-- https://heronatlas.com/api/v1/judgments.json: The existing public judgment ledger (format 1) (zh).
+- https://heronatlas.com/api/v1/judgments.json: Signed judgment ledger (format 1), with evidence-based outcome badges (zh).
 - https://heronatlas.com/api/v1/statements/ecb.json: Adjacent statement pairs and sentence changes for ecb (zh).
 - https://heronatlas.com/api/v1/statements/fed.json: Adjacent statement pairs and sentence changes for fed (zh).
 - https://heronatlas.com/api/v1/zh-hant/calendar.json: Key-event ICS entries; instants UTC, date-only entries have no invented time (zh-hant).
 - https://heronatlas.com/api/v1/zh-hant/central-banks.json: Verified policy rates, official sources and check dates (zh-hant).
 - https://heronatlas.com/api/v1/zh-hant/events.json: Approved event pages, facts, results and official references (zh-hant).
-- https://heronatlas.com/api/v1/zh-hant/home.json: Home policy facts, the next 72 hours, statement changes and the complete judgment ledger (zh-hant).
-- https://heronatlas.com/api/v1/zh-hant/judgments.json: The existing public judgment ledger (format 1) (zh-hant).
+- https://heronatlas.com/api/v1/zh-hant/home.json: Home schema_version=2: editorial regime hero, core-five policy facts, 21-day rolling calendar, statement highlights and signed ledger (zh-hant).
+- https://heronatlas.com/api/v1/zh-hant/judgments.json: Signed judgment ledger (format 1), with evidence-based outcome badges (zh-hant).
 - https://heronatlas.com/api/v1/zh-hant/statements/ecb.json: Adjacent statement pairs and sentence changes for ecb (zh-hant).
 - https://heronatlas.com/api/v1/zh-hant/statements/fed.json: Adjacent statement pairs and sentence changes for fed (zh-hant).
 
-English endpoints contain only admitted English fields; English event articles are unavailable. Chinese judgment data uses the existing root judgments.json format. Null values mean unknown; date-only calendar entries have no announced instant. Source checks and build times are distinct.
+English endpoints contain only admitted English fields; English event articles are unavailable. Home schema_version=2 replaces featured_diff with statement_highlights and provides an editorial regime_hero. Judgment API keeps signed fields and adds badge and annotation; root judgments.json stays unchanged. Null values mean unknown; date-only calendar entries have no announced instant. Source checks and build times are distinct.
 
 ## CLI & Data API
 
