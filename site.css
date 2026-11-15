@@ -459,7 +459,7 @@ del[data-cue]::before,ins[data-cue]::before{content:attr(data-cue) " ";position:
 .policy-matrix:not(.policy-matrix-full) td:nth-child(3),.policy-matrix:not(.policy-matrix-full) td:nth-child(4){text-align:center}
 .policy-matrix:not(.policy-matrix-full) td:nth-child(3) a,.policy-matrix:not(.policy-matrix-full) td:nth-child(4) a{justify-content:center}
 .policy-matrix:not(.policy-matrix-full) .rate-metadata{padding-inline-start:8px}
-.policy-matrix:not(.policy-matrix-full) td:nth-child(5) p{padding-inline-start:3px}
+.policy-matrix:not(.policy-matrix-full) td:nth-child(5) p{padding-inline-start:4px}
 .home-pulse .pulse-window .pulse-absolute{display:block;font-size:16px;white-space:nowrap}
 .home-pulse .pulse-window .pulse-remaining{display:block;white-space:nowrap}
 .home-pulse .pulse-window .pulse-remaining.is-past{font-size:16px}

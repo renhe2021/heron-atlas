@@ -131,24 +131,37 @@ renderFollows();
 (() => {
   const sections = [...document.querySelectorAll('[data-rolling-window]')].map(section => ({
     section,
-    entries: [...section.querySelectorAll('[data-window-item]')].map(node => ({node, at: Date.parse(node.getAttribute('data-at'))}))
-      .filter(row => Number.isFinite(row.at)).sort((a, b) => a.at - b.at),
     keyOnly: section.hasAttribute('data-key-window')
   }));
   if (!sections.length) return;
   let deadlineTimer;
-  const render = () => {
-    if (document.hidden) return;
+  let intervalTimer;
+  // Invariant: after any update that sampled now, every deadline ≤ now is
+  // rendered as due, and if any deadline > now exists and the page is visible,
+  // exactly one deadline timer is pending and fires no later than that deadline
+  // (per the clock at arming time).
+  updateRollingWindows = () => {
+    if (document.hidden) { clearTimeout(deadlineTimer); return; }
     const now = Date.now();
-    sections.forEach(({section, entries, keyOnly}) => {
+    let nextDeadline = Infinity;
+    sections.forEach(({section, keyOnly}) => {
+      const entries = [...section.querySelectorAll('[data-window-item]')].map(node => ({node, at: Date.parse(node.getAttribute('data-at'))}))
+        .filter(row => Number.isFinite(row.at)).sort((a, b) => a.at - b.at);
       for (let i = entries.length - 1; i >= 0; i -= 1) {
         if (entries[i].at < now - 3600000) { entries[i].node.remove(); entries.splice(i, 1); }
       }
+      // +1 preserves the inclusive sixty-minute boundary before expiry.
+      entries.forEach(({at}) => {
+        [at, at - 72 * 3600000, at + 3600000 + 1].forEach(instant => {
+          if (instant > now) nextDeadline = Math.min(nextDeadline, instant);
+        });
+      });
       const all = entries.filter(row => !keyOnly || row.node.getAttribute('data-tier') === '1');
-      section.hidden = all.length === 0;
       const card = keyOnly ? section.closest('.ledger-next-window') : null;
-      if (card) card.hidden = all.length === 0;
       const future = all.filter(row => row.at > now);
+      const exhausted = future.length === 0;
+      section.hidden = exhausted;
+      if (card) card.hidden = exhausted;
       const inside = keyOnly ? all : all.filter(row => now - 3600000 <= row.at && row.at <= now + 72 * 3600000);
       const fallback = !keyOnly && inside.length === 0;
       const candidates = fallback ? future : inside;
@@ -156,7 +169,7 @@ renderFollows();
       const followingFallback = candidates.length > 0 && (followed.length === 0 || keyOnly && future.length > 0 && !future.some(row => isFollowed(row.node)));
       const chosen = followingFallback ? candidates : followed.length ? followed : candidates;
       const keyVisible = keyOnly ? [...chosen.filter(row => row.at <= now), ...chosen.filter(row => row.at > now).slice(0, 1)] : [];
-      const visible = new Set((keyOnly ? keyVisible : fallback ? chosen.slice(0, 3) : chosen).map(row => row.node));
+      const visible = new Set((exhausted ? [] : keyOnly ? keyVisible : fallback ? chosen.slice(0, 3) : chosen).map(row => row.node));
       entries.forEach(({node, at}) => {
         node.hidden = !visible.has(node);
         const status = node.querySelector('[data-window-status]');
@@ -172,7 +185,7 @@ renderFollows();
       const followNote = section.querySelector('[data-window-follow-note]');
       if (followNote) {
         followNote.textContent = T('关注的经济体在此窗口内没有日程，已显示全部经济体。');
-        followNote.hidden = !followingFallback;
+        followNote.hidden = exhausted || !followingFallback;
       }
       const next = section.querySelector('[data-window-next]');
       if (next) {
@@ -182,6 +195,7 @@ renderFollows();
         next.textContent = first ? T('下一项：') + (first.node.querySelector('[data-window-name]')?.textContent || '') + ' · ' + (first.node.querySelector('time')?.textContent || '') : '';
       }
       if (!keyOnly) {
+        document.querySelectorAll('[data-window-calendar]').forEach(link => { link.hidden = !exhausted; });
         const followedFuture = future.filter(row => isFollowed(row.node));
         const first = (followingFallback ? future : followedFuture.length ? followedFuture : future)[0];
         document.querySelectorAll('[data-rolling-pulse]').forEach(pulse => {
@@ -219,21 +233,20 @@ renderFollows();
         });
       }
     });
-  };
-  const scheduleDeadline = () => {
     clearTimeout(deadlineTimer);
-    if (document.hidden) return;
-    const now = Date.now();
-    // Wake exactly on due, window entry, and expiry; +1 preserves the inclusive
-    // sixty-minute boundary and removes the row immediately afterwards.
-    const instants = sections.flatMap(({entries}) => entries.flatMap(({at}) => [at, at - 72 * 3600000, at + 3600000 + 1]))
-      .filter(at => at > now);
-    if (instants.length) deadlineTimer = setTimeout(() => { render(); scheduleDeadline(); }, Math.min(Math.min(...instants) - now, 2147483647));
+    // Only the delay reads the arming clock; nextDeadline belongs to the render sample.
+    // If rendering crossed it, a zero-delay update catches up immediately.
+    if (!document.hidden && Number.isFinite(nextDeadline)) deadlineTimer = setTimeout(updateRollingWindows, Math.min(Math.max(0, nextDeadline - Date.now()), 2147483647));
   };
-  updateRollingWindows = () => { render(); scheduleDeadline(); };
-  updateRollingWindows();
-  setInterval(render, 30000);
-  document.addEventListener('visibilitychange', updateRollingWindows);
+  const resume = () => {
+    clearInterval(intervalTimer);
+    updateRollingWindows();
+    if (document.hidden) return;
+    intervalTimer = setInterval(updateRollingWindows, 30000);
+  };
+  resume();
+  document.addEventListener('visibilitychange', resume);
+  window.addEventListener('pageshow', resume);
 })();
 /* The source keeps every statement panel readable without JavaScript. */
 (() => {
@@ -369,34 +382,49 @@ renderFollows();
 })();
 
 
-/* Answer-card countdown (2026-10-28): the build writes the instant and the first label; this only ticks it every
-   30 s while the tab is visible, and after the instant says so instead of guessing what happened. */
+/* Answer-card countdown and active-judgment status share the visible 30 s
+   clock and exact deadline. Judgment check times stay absolute in the HTML. */
 (() => {
-  const nodes = Array.from(document.querySelectorAll('[data-countdown]'));
-  if (!nodes.length) return;
+  const selector = '[data-countdown], [data-judgment-check]';
+  if (!document.querySelectorAll(selector).length) return;
+  const originals = new WeakMap();
+  let deadlineTimer;
+  let intervalTimer;
+  // Invariant: after any update that sampled now, every deadline ≤ now is
+  // rendered as due, and if any deadline > now exists and the page is visible,
+  // exactly one deadline timer is pending and fires no later than that deadline
+  // (per the clock at arming time).
   const update = () => {
-    if (document.hidden) return;
+    if (document.hidden) { clearTimeout(deadlineTimer); return; }
     const now = Date.now();
-    nodes.forEach((node) => {
-      const at = Date.parse(node.getAttribute('data-countdown'));
-      if (Number.isNaN(at)) return;
+    let next = Infinity;
+    document.querySelectorAll(selector).forEach(node => {
+      const judgment = node.hasAttribute('data-judgment-check');
+      const at = Date.parse(node.getAttribute(judgment ? 'data-judgment-check' : 'data-countdown'));
+      if (!Number.isFinite(at)) return;
+      if (!originals.has(node)) originals.set(node, {initial: node.textContent, title: node.title || ''});
+      const {initial, title} = originals.get(node);
+      if (at > now) next = Math.min(next, at);
       const left = at - now;
+      if (judgment) {
+        node.textContent = left > 0 ? initial : T('已到点 · 官方数据核验中');
+        return;
+      }
       node.textContent = left > 0 ? (node.hasAttribute('data-countdown-date') ? '' : countdownLabel(left)) : T('已到点 · 官方数据核验中');
-      if (left <= 0) node.title = T('已到公布时间，以官方公布为准');
+      node.title = left <= 0 ? T('已到公布时间，以官方公布为准') : title;
       node.classList.toggle('is-past', left <= 0);
     });
-  };
-  let deadlineTimer;
-  const scheduleDeadline = () => {
     clearTimeout(deadlineTimer);
-    if (document.hidden) return;
-    const now = Date.now();
-    const upcoming = nodes.map(node => Date.parse(node.getAttribute('data-countdown'))).filter(at => Number.isFinite(at) && at > now);
-    if (!upcoming.length) return;
-    deadlineTimer = setTimeout(() => { update(); scheduleDeadline(); }, Math.min(Math.min(...upcoming) - now, 2147483647));
+    // The arming clock adjusts only the delay, never the chosen deadline.
+    if (!document.hidden && Number.isFinite(next)) deadlineTimer = setTimeout(update, Math.min(Math.max(0, next - Date.now()), 2147483647));
   };
-  update();
-  scheduleDeadline();
-  setInterval(update, 30000);
-  document.addEventListener('visibilitychange', () => { update(); scheduleDeadline(); });
+  const resume = () => {
+    clearInterval(intervalTimer);
+    update();
+    if (document.hidden) return;
+    intervalTimer = setInterval(update, 30000);
+  };
+  resume();
+  document.addEventListener('visibilitychange', resume);
+  window.addEventListener('pageshow', resume);
 })();
