@@ -9,7 +9,7 @@ X-PUBLISHED-TTL:PT1H
 REFRESH-INTERVAL;VALUE=DURATION:PT1H
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2026-11-06@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261106T133000Z
 DTEND:20261106T140000Z
 SUMMARY:United States · US Employment Situation
@@ -19,7 +19,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-retail-sales.us-retail-sales-2026-11-17@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261117T133000Z
 DTEND:20261117T140000Z
 SUMMARY:United States · US retail sales
@@ -29,20 +29,8 @@ DESCRIPTION:2026-11-17 21:30 Beijing time\; the official release prevails.
 URL:https://www.census.gov/economic-indicators/calendar-listview-2026.html
 END:VEVENT
 BEGIN:VEVENT
-UID:bea-schedule.bea-schedule-2026-11-18-outdoor-recreation-economic-statis
- tics-u-s-and-states-2025@heron-atlas
-DTSTAMP:20261118T143930Z
-DTSTART:20261118T150000Z
-DTEND:20261118T153000Z
-SUMMARY:United States · US data release: Outdoor Recreation Economic Stati
- stics\, U.S. and States\, 2025
-DESCRIPTION:2026-11-18 23:00 Beijing time\; the official release prevails. 
- Official source: https://www.bea.gov/news/schedule
-URL:https://www.bea.gov/news/schedule
-END:VEVENT
-BEGIN:VEVENT
 UID:us-fomc-minutes.us-fomc-minutes-2026-11-18@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261118T190000Z
 DTEND:20261118T193000Z
 SUMMARY:United States · FOMC minutes
@@ -53,7 +41,7 @@ URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-11-19@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261119T133000Z
 DTEND:20261119T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -64,7 +52,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bea-schedule.bea-schedule-2026-11-20-activities-of-u-s-multinational-en
  terprises-2024@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261120T133000Z
 DTEND:20261120T140000Z
 SUMMARY:United States · US data release: Activities of U.S. Multinational 
@@ -75,7 +63,7 @@ URL:https://www.bea.gov/news/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:bea-schedule.bea-schedule-2026-11-25-gdp-3rd-quarter-2026@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261125T133000Z
 DTEND:20261125T140000Z
 SUMMARY:United States · US data release: GDP (Second Estimate) and Corpora
@@ -87,7 +75,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bea-schedule.bea-schedule-2026-11-25-personal-income-and-outlays-octobe
  r-2026@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261125T133000Z
 DTEND:20261125T140000Z
 SUMMARY:United States · US data release: Personal Income and Outlays\, Oct
@@ -98,7 +86,7 @@ URL:https://www.bea.gov/news/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-11-25@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261125T133000Z
 DTEND:20261125T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -108,7 +96,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-ism-manufacturing.us-ism-manufacturing-2026-12-01@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261201T150000Z
 DTEND:20261201T153000Z
 SUMMARY:United States · US ISM Manufacturing PMI
@@ -120,7 +108,7 @@ URL:https://www.ismworld.org/supply-management-news-and-reports/reports/rob
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jolts.us-jolts-2026-12-01@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261201T150000Z
 DTEND:20261201T153000Z
 SUMMARY:United States · US job openings (JOLTS)
@@ -130,7 +118,7 @@ URL:https://www.bls.gov/schedule/news_release/jolts.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bea-schedule.bea-schedule-2026-12-02-gdp-2025@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261202T133000Z
 DTEND:20261202T140000Z
 SUMMARY:United States · US data release: GDP by County and Personal Income
@@ -141,7 +129,7 @@ URL:https://www.bea.gov/news/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-12-03@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261203T133000Z
 DTEND:20261203T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -151,7 +139,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-ism-services.us-ism-services-2026-12-03@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261203T150000Z
 DTEND:20261203T153000Z
 SUMMARY:United States · US ISM Services PMI
@@ -163,7 +151,7 @@ URL:https://www.ismworld.org/supply-management-news-and-reports/reports/rob
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2026-12-04@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261204T133000Z
 DTEND:20261204T140000Z
 SUMMARY:United States · US Employment Situation
@@ -173,7 +161,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2026-12-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261210T133000Z
 DTEND:20261210T140000Z
 SUMMARY:United States · US CPI
@@ -183,7 +171,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-12-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261210T133000Z
 DTEND:20261210T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -193,7 +181,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-ppi.us-ppi-2026-12-15@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261215T133000Z
 DTEND:20261215T140000Z
 SUMMARY:United States · US PPI
@@ -203,7 +191,7 @@ URL:https://www.bls.gov/schedule/news_release/ppi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-retail-sales.us-retail-sales-2026-12-16@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261216T133000Z
 DTEND:20261216T140000Z
 SUMMARY:United States · US retail sales
@@ -214,7 +202,7 @@ URL:https://www.census.gov/economic-indicators/calendar-listview-2026.html
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-12-17@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261217T133000Z
 DTEND:20261217T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -224,7 +212,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-12-24@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261224T133000Z
 DTEND:20261224T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -234,7 +222,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-fomc-minutes.us-fomc-minutes-2026-12-30@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261230T190000Z
 DTEND:20261230T193000Z
 SUMMARY:United States · FOMC minutes
@@ -245,7 +233,7 @@ URL:https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2026-12-31@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20261231T133000Z
 DTEND:20261231T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -255,7 +243,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jolts.us-jolts-2027-01-05@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270105T150000Z
 DTEND:20270105T153000Z
 SUMMARY:United States · US job openings (JOLTS)
@@ -265,7 +253,7 @@ URL:https://www.bls.gov/schedule/news_release/jolts.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2027-01-07@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270107T133000Z
 DTEND:20270107T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -275,7 +263,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-01-08@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270108T133000Z
 DTEND:20270108T140000Z
 SUMMARY:United States · US Employment Situation
@@ -285,7 +273,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-01-13@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270113T133000Z
 DTEND:20270113T140000Z
 SUMMARY:United States · US CPI
@@ -295,7 +283,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2027-01-14@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270114T133000Z
 DTEND:20270114T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -305,7 +293,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-ppi.us-ppi-2027-01-14@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270114T133000Z
 DTEND:20270114T140000Z
 SUMMARY:United States · US PPI
@@ -315,7 +303,7 @@ URL:https://www.bls.gov/schedule/news_release/ppi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:us-retail-sales.us-retail-sales-2027-01-15@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270115T133000Z
 DTEND:20270115T140000Z
 SUMMARY:United States · US retail sales
@@ -326,7 +314,7 @@ URL:https://www.census.gov/economic-indicators/calendar-listview-2026.html
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2027-01-21@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270121T133000Z
 DTEND:20270121T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -336,7 +324,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:us-jobless-claims.us-jobless-claims-2027-01-28@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270128T133000Z
 DTEND:20270128T140000Z
 SUMMARY:United States · US initial jobless claims
@@ -346,7 +334,7 @@ URL:https://oui.doleta.gov/unemploy/claims_arch.asp
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-02-05@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270205T133000Z
 DTEND:20270205T140000Z
 SUMMARY:United States · US Employment Situation
@@ -356,7 +344,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-02-11@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270211T133000Z
 DTEND:20270211T140000Z
 SUMMARY:United States · US CPI
@@ -366,7 +354,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-03-05@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270305T133000Z
 DTEND:20270305T140000Z
 SUMMARY:United States · US Employment Situation
@@ -376,7 +364,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-03-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270310T133000Z
 DTEND:20270310T140000Z
 SUMMARY:United States · US CPI
@@ -386,7 +374,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-04-02@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270402T123000Z
 DTEND:20270402T130000Z
 SUMMARY:United States · US Employment Situation
@@ -396,7 +384,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-04-13@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270413T123000Z
 DTEND:20270413T130000Z
 SUMMARY:United States · US CPI
@@ -406,7 +394,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-05-07@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270507T123000Z
 DTEND:20270507T130000Z
 SUMMARY:United States · US Employment Situation
@@ -416,7 +404,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-05-12@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270512T123000Z
 DTEND:20270512T130000Z
 SUMMARY:United States · US CPI
@@ -426,7 +414,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-06-04@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270604T123000Z
 DTEND:20270604T130000Z
 SUMMARY:United States · US Employment Situation
@@ -436,7 +424,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-06-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270610T123000Z
 DTEND:20270610T130000Z
 SUMMARY:United States · US CPI
@@ -446,7 +434,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-07-02@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270702T123000Z
 DTEND:20270702T130000Z
 SUMMARY:United States · US Employment Situation
@@ -456,7 +444,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-07-14@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270714T123000Z
 DTEND:20270714T130000Z
 SUMMARY:United States · US CPI
@@ -466,7 +454,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-08-06@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270806T123000Z
 DTEND:20270806T130000Z
 SUMMARY:United States · US Employment Situation
@@ -476,7 +464,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-08-11@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270811T123000Z
 DTEND:20270811T130000Z
 SUMMARY:United States · US CPI
@@ -486,7 +474,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-09-03@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270903T123000Z
 DTEND:20270903T130000Z
 SUMMARY:United States · US Employment Situation
@@ -496,7 +484,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-09-14@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20270914T123000Z
 DTEND:20270914T130000Z
 SUMMARY:United States · US CPI
@@ -506,7 +494,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-10-08@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271008T123000Z
 DTEND:20271008T130000Z
 SUMMARY:United States · US Employment Situation
@@ -516,7 +504,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-10-14@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271014T123000Z
 DTEND:20271014T130000Z
 SUMMARY:United States · US CPI
@@ -526,7 +514,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-11-05@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271105T123000Z
 DTEND:20271105T130000Z
 SUMMARY:United States · US Employment Situation
@@ -536,7 +524,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-11-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271110T133000Z
 DTEND:20271110T140000Z
 SUMMARY:United States · US CPI
@@ -546,7 +534,7 @@ URL:https://www.bls.gov/schedule/news_release/cpi.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-empsit.bls-empsit-2027-12-03@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271203T133000Z
 DTEND:20271203T140000Z
 SUMMARY:United States · US Employment Situation
@@ -556,7 +544,7 @@ URL:https://www.bls.gov/schedule/news_release/empsit.htm
 END:VEVENT
 BEGIN:VEVENT
 UID:bls-cpi.bls-cpi-2027-12-10@heron-atlas
-DTSTAMP:20261118T143930Z
+DTSTAMP:20261118T151059Z
 DTSTART:20271210T133000Z
 DTEND:20271210T140000Z
 SUMMARY:United States · US CPI
